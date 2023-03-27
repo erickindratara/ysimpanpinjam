@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+            <record id="yudha_validasi_iuran_pokok_tree" model="ir.ui.view">
+                <field name="name">yudha.validasi.iuran.pokok.tree</field>
+                <field name="model">yudha.validasi.iuran.pokok</field>
+                <field name="type">tree</field>
+                <field name="priority" eval="8"/>
+                <field name="arch" type="xml">
+                    <tree string="Validasi Iuran Pokok">
+                         <field name="jns_dok" />
+                         <field name="no_val"/>
+                         <field name="tgl_val"/>
+                         <field name="tgl_periode"/>
+                         <field name="keterangan"/>
+                         <field name="confirm_by"/>
+                         <field name="state"/>
+                    </tree>
+                </field>
+            </record>
+            <record id="yudha_validasi_iuran_pokok_form" model="ir.ui.view">
+                <field name="name">yudha.validasi.iuran.pokok.form</field>
+                <field name="model">yudha.validasi.iuran.pokok</field>
+                <field name="type">form</field>
+                <field name="priority" eval="8"/>
+                <field name="arch" type="xml">
+                    <form string="Master Validasi Iuran Pokok">
+                        <header>
+                               <button name="validate" string="Validation" type="object" states="draft"/>
+                               <field  name="state" widget="statusbar" statusbar_visible="draft,confirm" statusbar_colors='{"confirm":"blue"}'/>
+                        </header>
+                        <sheet string="ValidasiIuranPokok">
+                             <div class="oe_title">
+                                <h1>
+                                    <label for="confirm_by" class="oe_edit_only" string="Validasi Iuran Pokok"/>
+                                </h1>
+                             </div>
+                             <group>
+                                 <field name="jns_dok" />
+                                 <field name="no_val"/>
+                                 <field name="tgl_val"/>
+                                 <field name="tgl_periode"/>
+                                 <field name="keterangan"/>
+                                 <field name="confirm_by"/>
+                             </group>
+                             <notebook>
+                                  <page string="Details Item">
+                                      <field name="iuranp_ids" widget="one2many_list" >
+                                          <tree string="Detail Iuran Pokok" create="false" editable="bottom">
+                                                <field name="partner_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                                <field name="no_agt"/>
+                                                <field name="npk"/>
+                                                <field name="unit_kerja"/>
+                                                <field name="amount"/>
+                                                <field name="dok_pen"/>
+                                          </tree>
+                                      </field>
+                                  </page>
+                             </notebook>
+                         </sheet>
+                    </form>
+                </field>
+            </record>
+     </data>
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <record id="yudha_multi_backdate_inherit_stock_move_view" model="ir.ui.view">
+            <field name="name">yudha_multi_backdate_stock_move_view</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date']" position="after" >
+                    <field name="remark"/>
+                    <field name="transfer_date"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

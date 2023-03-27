@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <record id="view_master_rate_deposito_tree" model="ir.ui.view">
+            <field name="name">yudha.rate.deposito.tree</field>
+            <field name="model">yudha.rate.deposito</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Master Rate Deposito">
+                    <field name="tgl_input"/>
+                    <field name="rate_depo"/>
+                    <field name="comp_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}" widget="selection"/>
+                    <field name="bunga_depo"/>
+                    <field name="depo_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- form -->
+        <record id="view_master_rate_deposito_form" model="ir.ui.view">
+            <field name="name">yudha.rate.deposito.form</field>
+            <field name="model">yudha.rate.deposito</field>
+            <field name="type">form</field>
+            <field name="priority" eval="7"/>
+            <field name="arch" type="xml">
+                <form string="Master Rate Deposito" >
+                    <sheet>
+                        <group string="">
+                            <field name="tgl_input"/>
+                            <field name="rate_depo"/>
+                            <field name="comp_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}" widget="selection"/>
+                            <field name="bunga_depo"/>
+                            <field name="depo_id" invisible="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <template id="access_denied_by_proxy" name="Access Denied">
+        <t t-call="web.frontend_layout">
+            <t t-set="html_data" t-value="{'style': 'height: 100%;'}"/>
+            <t t-set="body_classname" t-value="'bg-100'"/>
+            <t t-set="no_header" t-value="True"/>
+            <t t-set="no_footer" t-value="True"/>
+            <div id="background" t-attf-style="background-image: url('#{background_src}'); background-color: #{background_color};">
+                <marquee class="py-3"><center><strong><h2>This Web Cannot Be Access With Proxy</h2></strong></center></marquee>
+            </div>
+        </t>
+    </template>
+
+    <template id="access_denied_proxy" name="Access Denied">
+        <t t-call="yudha_textile_manufacturing.access_denied_by_proxy"/>
+    </template>
+</odoo>

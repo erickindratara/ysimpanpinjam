@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <record id="view_register_tabungan_tree" model="ir.ui.view">
+            <field name="name">yudha.register.tabungan.tree</field>
+            <field name="model">yudha.register.tabungan</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Register Tabungan">
+                    <field name="tanggal"/>
+                    <field name="jenis_tabungan"/>
+                    <field name="no_rekening"/>
+                    <field name="no_agt"/>
+                    <field name="partner_id"/>
+                    <field name="atasnama"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- form -->
+        <record id="view_register_tabungan_form" model="ir.ui.view">
+            <field name="name">yudha.register.tabungan.form</field>
+            <field name="model">yudha.register.tabungan</field>
+            <field name="type">form</field>
+            <field name="priority" eval="7"/>
+            <field name="arch" type="xml">
+                <form string="Register Tabungan" >
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                             <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="state" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                             </button>
+                        </div>
+                        <group string="">
+                            <field name="tanggal"/>
+                            <field name="jenis_tabungan" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            <field name="no_rekening"/>
+                            <field name="no_agt"/>
+                            <field name="partner_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            <field name="atasnama"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

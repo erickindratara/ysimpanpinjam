@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <!--tree view-->
+        <record id="view_iuran_wajib_tree" model="ir.ui.view">
+            <field name="name">yudha.iuran.wajib.tree</field>
+            <field name="model">yudha.iuran.wajib</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Iuran Wajib" >
+                    <field name="nm_trans"/>
+                    <field name="docnum"/>
+                    <field name="tgl_trans"/>
+                    <field name="jns_trans"/>
+                    <!--<field name="asal_dana"/>-->
+                    <!--<field name="no_rek_agt"/>-->
+                    <!--<field name="nm_bank"/>-->
+                    <!--<field name="atasnama"/>-->
+                    <!--<field name="no_rek_bank"/>-->
+                    <field name="pt_asal"/>
+                    <field name="keterangan"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- form -->
+        <record id="view_iuran_wajib_form" model="ir.ui.view">
+            <field name="name">yudha.iuran.wajib.form</field>
+            <field name="model">yudha.iuran.wajib</field>
+            <field name="type">form</field>
+            <field name="priority" eval="7"/>
+            <field name="arch" type="xml">
+                <form string="Iuran Wajib" >
+                    <header>
+                           <field  name="state" widget="statusbar" statusbar_visible="ready,done" statusbar_colors='{"done":"blue"}'/>
+                    </header>
+                    <sheet>
+                        <group string="" col="2">
+                            <field name="nm_trans"/>
+                            <field name="docnum"/>
+                            <field name="tgl_trans" widget="date"/>
+                            <field name="jns_trans" widget="radio"/>
+                            <!--<field name="asal_dana" attrs="{'invisible':['|',('jns_trans', '=', 'TD')]}"/>-->
+                            <!--<field name="no_rek_agt" attrs="{'invisible':['|',('asal_dana', '=', 'CS'),('jns_trans','=','SD')]}"/>-->
+                            <!--<field name="nm_bank" attrs="{'invisible':['|',('asal_dana', '=', 'CS'),('jns_trans','=','SD')]}"/>-->
+                            <!--<field name="atasnama" attrs="{'invisible':['|',('asal_dana', '=', 'CS'),('jns_trans','=','SD')]}"/>-->
+                            <!--<field name="no_rek_bank" attrs="{'invisible':['|',('jns_trans','=','TD'),('asal_dana', '=', 'CS')]}" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}" widget="selection"/>-->
+                            <field name="pt_asal" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}" widget="selection"/>
+                            <field name="keterangan"/>
+                        </group>
+                         <notebook>
+                              <page string="Detail">
+                                  <field name="iuranwjb_ids" widget="one2many_list">
+                                     <tree string="Detail Iuran wajib" create="false" editable="bottom">
+                                        <field name="partner_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                        <field name="no_agt"/>
+                                        <field name="amount"/>
+                                     </tree>
+                                  </field>
+                              </page>
+                         </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- pivot -->
+        <record id="iuran_wajib_pivot" model="ir.ui.view">
+            <field name="name">iuran_wajib_pivot</field>
+            <field name="model">yudha.iuran.wajib</field>
+            <field name="arch" type="xml">
+                <pivot string="Iuran Wajib">
+                    <field name="tgl_trans" type ="row"/>
+                </pivot>
+            </field>
+        </record>
+
+    </data>
+</odoo>

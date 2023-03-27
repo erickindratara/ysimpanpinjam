@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <record id="yudha_product_template_subs_form_view" model="ir.ui.view">
+            <field name="name">yudha.product.template.subs.form.view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="account.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='invoicing']" position="after">
+                    <page string="Substitute" name="substitute">
+                        <field name="subs_product_ids">
+                            <tree editable="bottom">
+                                <field name="product_id"/>
+                                <field name="product_def_code"/>
+                                <field name="product_desc"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page name="halal" string="Halal Information">
+                        <group>
+                            <group>
+                                <field name="halal_number"/>
+                                <field name="halal_info"/>
+                            </group>
+                        </group>
+                        <field name="halal_line_ids" attrs="{'invisible': [('halal_info', '=', False)]}">
+                            <tree>
+                                <field name="halal_number"/>
+                                <field name="vendor_id"/>
+                                <field name="halal_image"/>
+                            </tree>
+                            <form>
+                                <group>
+                                    <group>
+                                        <field name="halal_number"/>
+                                        <field name="vendor_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="halal_image" widget="image" class="oe_avatar"/>
+                                    </group>
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <record id="product_variant_easy_edit_view" model="ir.ui.view">
+            <field name="name">product.product.view.form.easy</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[2]" position="after">
+                    <label for="name" string="Parent Product"/>
+                    <field name="name"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- confirm RFQ/PO  -->
+    <record id="purchase_order_bulk_confirm_form" model="ir.ui.view">
+        <field name="name">purchase.order.bulk.confirm.form</field>
+        <field name="model">purchase.order.bulk.confirm</field>
+        <field name="arch" type="xml">
+            <form string="Confirm RFQ/PO">
+                <p>Do you want to confirm the selected RFQ/PO(s)?</p>
+                <footer>
+                    <button name="request_confirm_purchase" type="object" string="confirm" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="purchase_order_bulk_confirm_action" model="ir.actions.act_window">
+        <field name="name">confirm</field>
+        <field name="res_model">purchase.order.bulk.confirm</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="purchase_order_bulk_confirm_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <act_window id="purchase_order_bulk_confirm_action_stock_picking"
+        name="Confirm"
+        res_model="purchase.order.bulk.confirm"
+        binding_model="purchase.order"
+        binding_views="list"
+        view_mode="form" target="new"
+    	groups="purchase.group_purchase_manager"
+    />
+
+</odoo>

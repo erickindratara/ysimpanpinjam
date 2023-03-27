@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+	<data>
+        <record id="yudha_multi_backdate_inherit_stock_invadjust_view" model="ir.ui.view">
+            <field name="name">stock_invadjust_view</field>
+            <field name="model">stock.inventory</field>
+            <field name="inherit_id" ref="stock.view_inventory_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='accounting_date']" position="after" >
+                    <field name="transfer_date" readonly="1"/>
+                    <field name="remark" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+		<record id="yudha_multi_backdate_view_change_invadjust_item" model="ir.ui.view">
+			<field name="name">Change InvAdjust Info</field>
+			<field name="model">change.inventory.adjust</field>
+			<field name="arch" type="xml">
+			<form string="Transfer Remark">
+                <group>
+                    <field name="transfer_date6"/>
+                    <field name="transfer_remark6"/>
+                </group>
+                <footer>
+                    <button name="Apply_Changes" type="object" string="Apply Changes" class="oe_highlight"/> or <button name="cancel" string="Cancel" special="cancel" class="oe_link"/>
+                </footer>
+                </form>
+			</field>
+		</record>
+
+        <record id="yudha_multi_backdate_action_view_change_invadjust_item" model="ir.actions.act_window">
+            <field name="name">Process Transfer of Inventory</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">change.inventory.adjust</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+	</data>
+
+</odoo>

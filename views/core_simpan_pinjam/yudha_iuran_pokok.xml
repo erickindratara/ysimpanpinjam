@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <!--tree view-->
+        <record id="view_iuran_pokok_tree" model="ir.ui.view">
+            <field name="name">yudha.iuran.pokok.tree</field>
+            <field name="model">yudha.iuran.pokok</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Iuran Pokok" >
+                    <field name="nm_trans"/>
+                    <field name="docnum"/>
+                    <field name="tgl_trans"/>
+                    <field name="partner_id"/>
+                    <field name="no_agt"/>
+                    <field name="jns_trans"/>
+                    <field name="asal_dana"/>
+                    <field name="no_rek_agt"/>
+                    <field name="nm_bank"/>
+                    <field name="atasnama"/>
+                    <field name="no_rek_bank"/>
+                    <field name="amount"/>
+                    <field name="keterangan"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- form -->
+        <record id="view_iuran_pokok_form" model="ir.ui.view">
+            <field name="name">iuran.pokok.form</field>
+            <field name="model">yudha.iuran.pokok</field>
+            <field name="type">form</field>
+            <field name="priority" eval="7"/>
+            <field name="arch" type="xml">
+                <form string="Iuran Pokok">
+                    <header>
+                           <field  name="state" widget="statusbar" statusbar_visible="ready,done" statusbar_colors='{"done":"blue"}'/>
+                    </header>
+                    <sheet>
+                        <group col="2">
+                            <field name="nm_trans"/>
+                            <field name="docnum"/>
+                            <field name="tgl_trans" widget="date" />
+                            <field name="no_agt"/>
+                            <field name="partner_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            <field name="jns_trans" widget="radio"/>
+                            <field name="asal_dana" />
+                            <field name="no_rek_agt" attrs="{'invisible':['|',('asal_dana', 'in', ('CS','PG'))]}"/>
+                            <field name="nm_bank" attrs="{'invisible':['|',('asal_dana', 'in', ('CS','PG'))]}"/>
+                            <field name="atasnama" attrs="{'invisible':['|',('asal_dana', 'in', ('CS','PG'))]}"/>
+                            <field name="no_rek_bank" attrs="{'invisible':['|',('jns_trans','=','TD'),('asal_dana', 'in', ('CS','PG'))]}" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}" widget="selection"/>
+                            <field name="amount"/>
+                            <field name="keterangan"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- pivot -->
+        <record id="iuran_pokok_pivot" model="ir.ui.view">
+            <field name="name">iuran_pokok_pivot</field>
+            <field name="model">yudha.iuran.pokok</field>
+            <field name="arch" type="xml">
+                <pivot string="Iuran Pokok">
+                    <field name="tgl_trans" type ="row"/>
+                    <field name="partner_id" type ="row"/>
+                    <field name="amount" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+    </data>
+</odoo>

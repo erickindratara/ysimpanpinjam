@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+    <record id="product_template_view_form_inherited_views" model="ir.ui.view">
+        <field name="name">product.template.view.form.inherit.views</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="model">product.template</field>
+        <field name="arch" type="xml">
+          <xpath expr="//header" position="inside">
+              <button name="request_for_approval"
+              type="object"
+              string="Request For Approval"
+              class="oe_highlight"
+              groups="purchase.group_purchase_user"
+              attrs="{'invisible': ['|', ('is_product_template', '=', False),
+                                    ('state_product_variant', '!=', 'draft')]}"
+            />
+
+            <button name="approve"
+              type="object"
+              string="Approve"
+              class="oe_highlight"
+              attrs="{'invisible': ['|', '|', '|', ('is_product_template', '=', False),
+                                    ('state_product_variant','!=','to_approve'),
+                                    ('check_approver', '=', True),
+            						('user_can_approve', '=', False)]}"
+            />
+
+            <button name="reject"
+              type="object"
+              string="Reject"
+              class="oe_highlight"
+              attrs="{'invisible': ['|', ('is_product_template', '=', False),
+                                    ('state_product_variant','!=','to_approve')]}"
+            />
+
+            <button name="set_to_draft"
+              type="object"
+              string="Set To Draft"
+              attrs="{'invisible': ['|', ('is_product_template', '=', False),
+                                    ('state_product_variant','!=','reject')]}"
+            />
+              <field name="state_product_variant" widget="statusbar" invisible="1"/>
+              <field name="state_product" widget="statusbar"
+              		 attrs="{'invisible': [('is_product_template', '=', False)]}"/>
+              <field name="is_product_template" invisible="1"/>
+              <field name="check_approver" invisible="1"/>
+              <field name="user_can_approve" invisible="1"/>
+              <field name="allow_variant" invisible="1"/>
+              <field name="allow_edit" invisible="1"/>
+          </xpath>
+          <!--<xpath expr="//field[@name='version']" position="attributes">
+            <attribute name="attrs">{'readonly': [('state_product', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+          </xpath>-->
+            <xpath expr="//page[@name='general_information']" position="after">
+                <page name="list_of_approver" string="List Approver"
+                      attrs="{'invisible': ['|', ('is_product_template', '=', False),
+                                            ('state_product_variant','=','draft')]}">
+                   <field name="list_approver_ids" readonly="1">
+                    <tree string="Approver" editable="bottom">
+                          <field name="user_id"/>
+                          <field name="group_id"/>
+                          <field name="state"/>
+                          <field name="date"/>
+                      </tree>
+                  </field>
+              </page>
+            </xpath>
+        	<field name="type" position="attributes">
+        		<attribute name="attrs">{'readonly': [('state_product', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+        	</field>
+        	<field name="categ_id" position="attributes">
+        		<attribute name="attrs">{'readonly': [('state_product', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+        	</field>
+        	<xpath expr="//page[@name='general_information']/group[2]/field[@name='description']" position="attributes">
+        		<attribute name="attrs">{'readonly': [('state_product', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+        	</xpath>
+        	<field name="list_price" position="attributes">
+        		<attribute name="attrs">{'readonly': [('state_product', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+        	</field>
+        	<field name="uom_id" position="attributes">
+        		<attribute name="attrs">{'readonly': [('state_product', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+        	</field>
+        	<field name="uom_po_id" position="attributes">
+        		<attribute name="attrs">{'readonly': [('state_product', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+        	</field>
+        </field>
+    </record>
+
+
+    <record id="product_product_template_form_view" model="ir.ui.view">
+        <field name="name">product.product.template.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="priority">5</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='taxes_id']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state_product_variant', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="/form/sheet/notebook/page[2]/group[2]/field[@name='description_sale']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state_product_variant', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='supplier_taxes_id']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state_product_variant', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+            </xpath>
+        </field>
+      </record>
+
+    
+    <record model="ir.ui.view" id="product_product_template_invoice_policy_form_view">
+        <field name="name">product.product.template.invoice.policy.form_view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='seller_ids']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state_product_variant', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='purchase_method']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state_product_variant', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='description_purchase']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state_product_variant', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='route_ids']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state_product_variant', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='sale_delay']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state_product_variant', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='weight']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state_product_variant', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+            </xpath>
+             <xpath expr="//field[@name='volume']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state_product_variant', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='description_pickingout']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state_product_variant', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='description_pickingin']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state_product_variant', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='description_picking']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state_product_variant', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='property_stock_production']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state_product_variant', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='property_stock_inventory']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state_product_variant', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='property_account_income_id']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state_product_variant', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='property_account_expense_id']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state_product_variant', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='property_account_creditor_price_difference']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state_product_variant', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//group[@name='packaging']" position="after">
+    			<group name="marketing_information" string="Marketing Information">
+    				<field name="marketing_name" attrs="{'readonly': [('state_product', '!=', 'draft'), ('allow_edit', '=', False)]}"/>
+    				<field name="marketing_description" attrs="{'readonly': [('state_product', '!=', 'draft'), ('allow_edit', '=', False)]}"/>
+    				<field name="marketing_ingredients" attrs="{'readonly': [('state_product', '!=', 'draft'), ('allow_edit', '=', False)]}"/>
+    				<field name="ecommerce_ids" string="Tags" widget="many2many_tags" attrs="{'readonly': [('state_product', '!=', 'draft'), ('allow_edit', '=', False)]}"/>
+    			</group>
+    		</xpath>
+        </field>
+    </record>
+
+
+     <record id="product_product_template_form_view_inherits" model="ir.ui.view">
+        <field name="name">product.product.template.form.view.inheritst</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="purchase.view_product_supplier_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='purchase_requisition']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state_product_variant', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+<!--
+    <record id="view_mrp_product_template_form_inherited" model="ir.ui.view">
+        <field name="name">product.form.mrp.inherited</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.view_template_property_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='produce_delay']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state_product_variant', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+            </xpath>
+        </field>
+    </record>-->
+
+    <record id="product_template_only_form_view_inherited" model="ir.ui.view">
+    	<field name="name">product.template.only.form.view.inherited</field>
+    	<field name="model">product.template</field>
+    	<field name="inherit_id" ref="product.product_template_only_form_view"/>
+    	<field name="arch" type="xml">
+    		<xpath expr="//page[@name='variants']/field[@name='attribute_line_ids']" position="attributes">
+    			<attribute name="attrs">{'readonly': [('allow_variant', '=', False)]}</attribute>
+    		</xpath>
+    		<field name="default_code" position="attributes">
+    			<attribute name="attrs">{'readonly': [('state_product', '!=', 'draft'), ('allow_edit', '=', False)], 'invisible': [('product_variant_count', '>', 1)]}</attribute>
+    		</field>
+    		<field name="barcode" position="attributes">
+    			<attribute name="attrs">{'readonly': [('state_product', '!=', 'draft'), ('allow_edit', '=', False)], 'invisible': [('product_variant_count', '>', 1)]}</attribute>
+    		</field>
+    	</field>
+    </record>
+<!--
+    <record id="product_template_form_view_inherited" model="ir.ui.view">
+    	<field name="name">product.template.form.view.inherited</field>
+    	<field name="model">product.template</field>
+    	<field name="inherit_id" ref="website_sale.product_template_form_view"/>
+    	<field name="arch" type="xml">
+    		<xpath expr="//group[@name='shop']/group" position="after">
+    			<group name="marketing_information" string="Marketing Information">
+    				<field name="marketing_name" attrs="{'readonly': [('state_product', '!=', 'draft'), ('allow_edit', '=', False)]}"/>
+    				<field name="marketing_description" attrs="{'readonly': [('state_product', '!=', 'draft'), ('allow_edit', '=', False)]}"/>
+    				<field name="marketing_ingredients" attrs="{'readonly': [('state_product', '!=', 'draft'), ('allow_edit', '=', False)]}"/>
+    				<field name="ecommerce_ids" string="Tags" widget="many2many_tags" attrs="{'readonly': [('state_product', '!=', 'draft'), ('allow_edit', '=', False)]}"/>
+    			</group>
+    		</xpath>
+    	</field>
+    </record>-->
+
+    <record id="product_template_search_view_inherited" model="ir.ui.view">
+    	<field name="name">product.template.search.view.inherited</field>
+    	<field name="model">product.template</field>
+    	<field name="inherit_id" ref="product.product_template_search_view"/>
+    	<field name="arch" type="xml">
+    		<xpath expr="//search/filter[@name='consumable']" position="after">
+    			<separator/>
+    			<filter string="Draft" name="product_draft" domain="[('state_product', '=', 'draft')]"/>
+    			<filter string="To Approve" name="product_to_approve" domain="[('state_product', '=', 'to_approve')]"/>
+    			<filter string="Approved" name="product_approve" domain="[('state_product', '=', 'approve')]"/>
+    			<filter string="Rejected" name="product_approve" domain="[('state_product', '=', 'reject')]"/>
+    		</xpath>
+    	</field>
+    </record>
+
+    <record id="product_template_only_form_view_inh_product_date_inherit_activation" model="ir.ui.view">
+    	<field name="name">product.template.only.form.view.inh.product.date.inherit.activation</field>
+    	<field name="model">product.template</field>
+    	<field name="inherit_id" ref="yudha_simpan_pinjam.yudha_product_template_only_form_view_inh_product_date"/>
+    	<field name="arch" type="xml">
+    		<xpath expr="//field[@name='is_certain_date']" position="attributes">
+    			<attribute name="attrs">{'readonly': [('state_product', '!=', 'draft'), ('allow_variant', '=', False)]}</attribute>
+    		</xpath>
+    	</field>
+    </record>
+
+    <record id="product_template_form_view_procurement_button_inherited" model="ir.ui.view">
+    	<field name="name">product.template.form.view.procurement.button.inherited</field>
+    	<field name="model">product.template</field>
+    	<field name="inherit_id" ref="stock.product_template_form_view_procurement_button"/>
+    	<field name="arch" type="xml">
+    		<field name="responsible_id" position="attributes">
+    			<attribute name="attrs">{'readonly': [('state_product', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+    		</field>
+    	</field>
+    </record>
+
+    <record id="product_template_form_view_inherited_activation" model="ir.ui.view">
+    	<field name="name">product.template.form.view.inherited.activation</field>
+    	<field name="model">product.template</field>
+    	<field name="inherit_id" ref="yudha_simpan_pinjam.yudha_product_template_subs_form_view"/>
+    	<field name="arch" type="xml">
+    		<field name="subs_product_ids" position="attributes">
+    			<attribute name="attrs">{'readonly': [('state_product', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+    		</field>
+    	</field>
+    </record>
+
+    <record id="product_template_view_form_inherited_activation" model="ir.ui.view">
+    	<field name="name">product.template.view.form.inherited.activation</field>
+    	<field name="model">product.template</field>
+    	<field name="inherit_id" ref="yudha_simpan_pinjam.yudha_product_template_view_form"/>
+    	<field name="arch" type="xml">
+    		<field name="outlet" position="attributes">
+    			<attribute name="attrs">{'readonly': [('state_product', '!=', 'draft'), ('allow_edit', '=', False)]}</attribute>
+    		</field>
+    	</field>
+    </record>
+
+    </data>
+</odoo>

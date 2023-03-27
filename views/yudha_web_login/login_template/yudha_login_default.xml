@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+  <template id="login_style_background" inherit_id="web.login" name="Login Default Inherit">
+      <xpath expr="//div[@class='form-group field-password']" position="after">
+      </xpath>
+  </template>
+</odoo>

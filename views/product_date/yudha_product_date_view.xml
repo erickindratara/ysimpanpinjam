@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="yudha_product_template_only_form_view_inh_product_date" model="ir.ui.view">
+            <field name="name">yudhaproduct.template.product.form.inh.product.date</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='barcode']" position="after">
+                    <field name="is_certain_date" string="Select date(s) of availability"/>
+                    <field name="product_date" widget="many2many_tags"
+                           attrs="{'invisible': [('is_certain_date', '=', False)], 'required': [('is_certain_date', '=', True)]}"/>
+                </xpath>
+           </field>
+        </record>
+        <record id="yudha_product_template_view_form" model="ir.ui.view">
+            <field name="name">product.template.view.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page name="outlet_segmentation" string="Unit Location Can Be Used">
+                        <group>
+                            <group>
+                                <field name="outlet" widget="radio"/>
+                                <field name="outlet_type_ids" options="{'no_create_edit': True}"
+                                       widget="many2many_tags"
+                                       attrs="{'invisible': [('outlet', '=', 'all')],
+                                               'required': [('outlet', '=', 'outlet')]}"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <!-- PRODUCT DATE FORM VIEW -->
+        <record id="yudha_product_date_form_view" model="ir.ui.view">
+            <field name="name">product.date.form</field>
+            <field name="model">product.date</field>
+            <field name="arch" type="xml">
+                <form string="Product Date">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" invisible="1"/>
+                                <field name="date"/>
+                            </group>
+                        </group>
+                        <group>
+                            <label for="product_lists"/>
+                            <field name="product_lists" nolabel="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!--PRODUCT DATE TREE VIEW-->
+        <record id="yudha_product_date_view_tree" model="ir.ui.view">
+            <field name="name">yudha.product.date.view.tree</field>
+            <field name="model">product.date</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="date"/>
+                </tree>
+            </field>
+        </record>
+        <!--PRODUCT DATE ACTION-->
+        <record id="yudha_product_date_action" model="ir.actions.act_window">
+            <field name="name">Product Date</field>
+            <field name="res_model">product.date</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new product date
+              </p><p>
+                You must define a product date to list all of your products
+                that you want to sell based on related date
+              </p>
+            </field>
+        </record>
+        <menuitem name="Product Date"
+                  id="menu_product_date_stock"
+                  action="yudha_product_date_action"
+                  parent="stock.menu_stock_inventory_control"
+                  sequence="4"/>
+        <menuitem name="Product Date"
+                  id="menu_product_date_purchase"
+                  action="yudha_product_date_action"
+                  parent="purchase.menu_purchase_products"
+                  sequence="4"/>
+    </data>
+</odoo>

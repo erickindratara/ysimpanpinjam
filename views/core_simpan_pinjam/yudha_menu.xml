@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+  <data>
+    <!-- actions opening views on models
+    -->
+
+    <record id="action_register_tabungan" model="ir.actions.act_window" >
+          <field name="name">Register Tabungan</field>
+          <field name="res_model">yudha.register.tabungan</field>
+          <field name="view_mode">tree,form</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk Register Tabungan
+            </p>
+              <p>Klik tombol create untuk Register Tabungan baru</p>
+          </field>
+    </record>
+
+    <record id="action_iuran_pokok" model="ir.actions.act_window" >
+          <field name="name">Simpanan Pokok</field>
+          <field name="res_model">yudha.iuran.pokok</field>
+          <field name="view_mode">tree,form,pivot</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk membuat Simpanan Pokok
+            </p>
+              <p>Klik tombol create untuk membuat Simpanan Pokok baru</p>
+          </field>
+    </record>
+    <record id="action_iuran_wajib_setor" model="ir.actions.act_window" >
+          <field name="name">Simpanan Wajib</field>
+          <field name="res_model">yudha.iuran.wajib.setor</field>
+          <field name="view_mode">tree,form,pivot</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk membuat Simpanan Wajib
+            </p>
+              <p>Klik tombol create untuk membuat Simpanan Wajib baru</p>
+          </field>
+    </record>
+
+    <record id="action_iuran_sukarela" model="ir.actions.act_window" >
+          <field name="name">Simpanan Sukarela</field>
+          <field name="res_model">yudha.iuran.sukarela</field>
+          <field name="view_mode">tree,form,pivot</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk membuat Simpanan Sukarela
+            </p>
+              <p>Klik tombol create untuk membuat Simpanan Sukarela baru</p>
+          </field>
+    </record>
+    <record id="action_tabungan" model="ir.actions.act_window">
+          <field name="name">Tabungan</field>
+          <field name="res_model">yudha.tabungan</field>
+          <field name="view_mode">tree,form,pivot</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk membuat Tabungan
+            </p>
+              <p>Klik tombol create untuk membuat Tabungan baru</p>
+          </field>
+    </record>
+
+    <record id="action_deposito" model="ir.actions.act_window">
+          <field name="name">Simpanan Berjangka</field>
+          <field name="res_model">yudha.deposito</field>
+          <field name="view_mode">tree,form,pivot</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk membuat Simpanan Berjangka
+            </p>
+              <p>Klik tombol create untuk membuat Simpanan Berjangka baru</p>
+          </field>
+    </record>
+
+    <record id="action_peminjaman_dana" model="ir.actions.act_window">
+          <field name="name">Peminjaman Dana</field>
+          <field name="res_model">yudha.peminjaman.dana</field>
+          <field name="view_mode">tree,form,pivot</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk input Peminjaman Dana
+            </p>
+              <p>Klik tombol create untuk input Peminjaman Dana baru</p>
+          </field>
+    </record>
+
+    <record id="action_peminjaman_konsumtif" model="ir.actions.act_window">
+          <field name="name">Peminjaman Konsumtif</field>
+          <field name="res_model">yudha.peminjaman.konsumtif</field>
+          <field name="view_mode">tree,form</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk membuat input Peminjaman Konsumtif
+            </p>
+              <p>Klik tombol create untuk input Peminjaman Konsumtif baru</p>
+          </field>
+    </record>
+
+    <record id="action_peminjaman_syariah" model="ir.actions.act_window">
+          <field name="name">Peminjaman Syariah/KPR</field>
+          <field name="res_model">yudha.peminjaman.syariah</field>
+          <field name="view_mode">tree,form</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk membuat input Peminjaman Syariah
+            </p>
+              <p>Klik tombol create untuk input Peminjaman Syariah baru</p>
+          </field>
+    </record>
+
+    <record id="action_peminjaman_barang" model="ir.actions.act_window">
+          <field name="name">Peminjaman Barang</field>
+          <field name="res_model">yudha.peminjaman.barang</field>
+          <field name="view_mode">tree,form</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk membuat input Peminjaman Barang
+            </p>
+              <p>Klik tombol create untuk input Peminjaman Barang baru</p>
+          </field>
+    </record>
+
+    <record id="action_peminjaman_sembako" model="ir.actions.act_window">
+          <field name="name">Peminjaman Sembako</field>
+          <field name="res_model">yudha.peminjaman.sembako</field>
+          <field name="view_mode">tree,form</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk membuat input Peminjaman Sembako
+            </p>
+              <p>Klik tombol create untuk input Peminjaman Sembako baru</p>
+          </field>
+    </record>
+
+    <record id="action_laporan_harian" model="ir.actions.act_window">
+          <field name="name">Laporan Harian</field>
+          <field name="res_model">yudha.laporan.harian</field>
+          <field name="view_mode">tree,form</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk membuat Laporan Harian
+            </p>
+              <p>Klik tombol create untuk membuat Laporan Harian baru</p>
+          </field>
+    </record>
+    <record id="action_laporan_bulanan" model="ir.actions.act_window">
+          <field name="name">Laporan Bulanan</field>
+          <field name="res_model">yudha.laporan.bulanan</field>
+          <field name="view_mode">tree,form</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk membuat Laporan Bulanan
+            </p>
+              <p>Klik tombol create untuk membuat Laporan Bulanan baru</p>
+          </field>
+    </record>
+    <record id="action_laporan_detail_anggota" model="ir.actions.act_window">
+          <field name="name">Laporan Detail Anggota</field>
+          <field name="res_model">yudha.laporan.detail.anggota</field>
+          <field name="view_mode">tree,form</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk membuat Laporan Detail Anggota
+            </p>
+              <p>Klik tombol create untuk membuat Laporan Detail Anggota baru</p>
+          </field>
+    </record>
+    <record id="action_laporan_deposito_transfer" model="ir.actions.act_window">
+          <field name="name">Laporan Transfer Bunga Deposito</field>
+          <field name="res_model">yudha.deposito.details.transfer</field>
+          <field name="view_mode">pivot</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk membuat Laporan Transfer Bunga Deposito
+            </p>
+              <p>Klik tombol create untuk membuat Laporan Transfer Bunga Deposito baru</p>
+          </field>
+    </record>
+
+    <record id="action_settings" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="res_model">yudha.settings</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk membuat Setting
+            </p>
+              <p>Klik tombol create untuk membuat Setting baru</p>
+          </field>
+
+    </record>
+    <!--<record id="action_schedule_otomatis" model="ir.actions.act_window">-->
+          <!--<field name="name">Schedule Otomatis</field>-->
+          <!--<field name="res_model">yudha.schedule.otomatis</field>-->
+          <!--<field name="view_mode">tree,form</field>-->
+          <!--<field name="help" type="html">-->
+            <!--<p class="oe_view_nocontent_create">-->
+              <!--Klik untuk membuat Schedule Otomatis-->
+            <!--</p>-->
+              <!--<p>Klik tombol create untuk membuat Schedule Otomatis baru</p>-->
+          <!--</field>-->
+    <!--</record>-->
+
+    <record id="action_master_jenis_tabungan" model="ir.actions.act_window" >
+          <field name="name">Master Jenis Tabungan</field>
+          <field name="res_model">yudha.master.jenis.tabungan</field>
+          <field name="view_mode">tree,form,pivot</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk membuat Master Jenis Tabungan
+            </p>
+              <p>Klik tombol create untuk membuat Master Jenis Tabungan baru</p>
+          </field>
+    </record>
+
+    <record id="action_master_jenis_deposito" model="ir.actions.act_window" >
+          <field name="name">Master Jenis Deposito</field>
+          <field name="res_model">yudha.master.jenis.deposito</field>
+          <field name="view_mode">tree,form,pivot</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk membuat Master Jenis Deposito
+            </p>
+              <p>Klik tombol create untuk membuat Master Jenis Deposito baru</p>
+          </field>
+    </record>
+
+    <record id="action_master_department" model="ir.actions.act_window" >
+          <field name="name">Master Department</field>
+          <field name="res_model">yudha.master.department</field>
+          <field name="view_mode">tree,form,pivot</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk membuat Master Department
+            </p>
+              <p>Klik tombol create untuk membuat Master Department Baru</p>
+          </field>
+    </record>
+
+    <record id="action_master_golongan" model="ir.actions.act_window" >
+          <field name="name">Master Golongan</field>
+          <field name="res_model">yudha.master.golongan</field>
+          <field name="view_mode">tree,form,pivot</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk membuat Master Golongan
+            </p>
+              <p>Klik tombol create untuk membuat Master Golongan baru</p>
+          </field>
+    </record>
+
+    <record id="action_asal_perusahaan" model="ir.actions.act_window" >
+          <field name="name">Master Asal Perusahaan</field>
+          <field name="res_model">yudha.asal.perusahaan</field>
+          <field name="view_mode">tree,form,pivot</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk membuat Master Asal Perusahaan
+            </p>
+              <p>Klik tombol create untuk membuat Master Asal Perusahaan baru</p>
+          </field>
+    </record>
+
+
+    <record id="action_validasi_harian" model="ir.actions.act_window" >
+          <field name="name">Validasi Harian</field>
+          <field name="res_model">yudha.validasi.harian</field>
+          <field name="view_mode">tree,form,pivot</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk membuat Validasi Harian
+            </p>
+              <p>Klik tombol create untuk membuat Validasi Harian baru</p>
+          </field>
+    </record>
+
+    <record id="action_validasi_sembako" model="ir.actions.act_window" >
+          <field name="name">Validasi Sembako</field>
+          <field name="res_model">yudha.validasi.sembako</field>
+          <field name="view_mode">tree,form,pivot</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk membuat Validasi Sembako
+            </p>
+              <p>Klik tombol create untuk membuat Validasi Sembako baru</p>
+          </field>
+    </record>
+
+    <record id="action_validasi_bulanan" model="ir.actions.act_window" >
+          <field name="name">Validasi Bulanan</field>
+          <field name="res_model">yudha.validasi.bulanan</field>
+          <field name="view_mode">tree,form,pivot</field>
+          <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Klik untuk membuat Validasi Bulanan
+            </p>
+              <p>Klik tombol create untuk membuat Validasi Bulanan baru</p>
+          </field>
+    </record>
+
+    <record id="master_amggota_action" model="ir.actions.act_window">
+        <field name="name">Data Anggota</field>
+        <field name="res_model">res.partner</field>
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{}</field>
+    </record>
+
+
+    <!-- Top menu item -->
+    <menuitem id="simpan_pinjam_0"
+        name="Simpan Pinjam"
+        web_icon="yudha_simpan_pinjam,static/description/icondata.png"
+        sequence="20"/>
+
+    <!-- SideBar Menu -->
+    <menuitem id="menu_dashboard"
+        name="Dashboard"
+        parent="simpan_pinjam_0"
+        groups="base.group_user"
+        sequence="1"/>
+    <menuitem id="data_master_1"
+        name="Master Data"
+        parent="simpan_pinjam_0"
+        groups="base.group_user"
+        sequence="2"/>
+    <menuitem id="simpanan"
+        name="Simpanan"
+        parent="simpan_pinjam_0"
+        sequence="3"/>
+    <menuitem id="pinjaman"
+        name="Pinjaman"
+        parent="simpan_pinjam_0"
+        sequence="4"/>
+    <menuitem id="validasi_general"
+        name="Validasi"
+        parent="simpan_pinjam_0"
+        sequence="5"/>
+    <menuitem id="transaksi_pos"
+        name="POS"
+        parent="simpan_pinjam_0"
+        action="point_of_sale.action_pos_config_kanban"
+        sequence="6"/>
+    <menuitem id="transaksi_so"
+        name="Sale Order"
+        parent="simpan_pinjam_0"
+        action="sale.action_orders"
+        sequence="7"/>
+    <menuitem id="transaksi_po"
+        name="Purchase Order"
+        parent="simpan_pinjam_0"
+        action="purchase.purchase_form_action"
+        sequence="8"/>
+    <menuitem id="laporan"
+        name="Laporan"
+        parent="simpan_pinjam_0"
+        sequence="9"/>
+    <menuitem id="config_1"
+        name="Configuration"
+        parent="simpan_pinjam_0"
+        groups="base.group_user"
+        sequence="10"/>
+
+    <!-- menu simpanan -->
+    <menuitem id="menu_register_tabungan"
+        name="Register Tabungan"
+        parent="simpanan"
+        action="action_register_tabungan"
+        groups="base.group_user"
+        sequence="1"/>
+    <menuitem id="menu_iuran_pokok"
+        name="Simpanan Pokok"
+        parent="simpanan"
+        action="action_iuran_pokok"
+        groups="base.group_user"
+        sequence="2"/>
+    <menuitem id="menu_iuran_wajib"
+        name="Simpanan Wajib"
+        parent="simpanan"
+        action="action_iuran_wajib_setor"
+        groups="base.group_user"
+        sequence="3"/>
+    <menuitem id="menu_iuran_sukarela"
+        name="Simpanan Sukarela"
+        parent="simpanan"
+        action="action_iuran_sukarela"
+        groups="base.group_user"
+        sequence="4"/>
+    <menuitem id="menu_tabungan"
+        name="Tabungan"
+        parent="simpanan"
+        action="action_tabungan"
+        groups="base.group_user"
+        sequence="5"/>
+    <menuitem id="menu_deposito"
+        name="Simpanan Berjangka"
+        parent="simpanan"
+        action="action_deposito"
+        groups="base.group_user"
+        sequence="6"/>
+
+
+   <!-- menu Pinjaman -->
+    <menuitem id="menu_peminjaman_dana"
+        name="Peminjaman Dana"
+        parent="pinjaman"
+        action="action_peminjaman_dana"
+        groups="base.group_user"
+        sequence="1"/>
+    <menuitem id="menu_peminjaman_konsumtif"
+        name="Peminjaman Konsumtif"
+        parent="pinjaman"
+        action="action_peminjaman_konsumtif"
+        groups="base.group_user"
+        sequence="2"/>
+    <menuitem id="menu_peminjaman_syariah"
+        name="Peminjaman Syariah/KPR"
+        parent="pinjaman"
+        action="action_peminjaman_syariah"
+        groups="base.group_user"
+        sequence="3"/>
+    <menuitem id="menu_peminjaman_barang"
+        name="Peminjaman Barang"
+        parent="pinjaman"
+        action="action_peminjaman_barang"
+        groups="base.group_user"
+        sequence="4"/>
+
+    <menuitem id="menu_validasi_harian"
+        name="Validasi Harian"
+        parent="validasi_general"
+        action="action_validasi_harian"
+        groups="base.group_user"
+        sequence="1"/>
+
+    <menuitem id="menu_validasi_bulanan"
+        name="Validasi Bulanan"
+        parent="validasi_general"
+        action="action_validasi_bulanan"
+        groups="base.group_user"
+        sequence="3"/>
+
+    <menuitem id="menu_laporan_harian"
+        name="Laporan Harian"
+        parent="laporan"
+        action="action_laporan_harian"
+        groups="base.group_user"
+        sequence="1"/>
+    <menuitem id="menu_laporan_bulanan"
+        name="Laporan Bulanan"
+        parent="laporan"
+        action="action_laporan_bulanan"
+        groups="base.group_user"
+        sequence="2"/>
+    <menuitem id="menu_detail_anggota"
+        name="Laporan Detail Anggota"
+        parent="laporan"
+        action="action_laporan_detail_anggota"
+        groups="base.group_user"
+        sequence="3"/>
+    <menuitem id="menu_laporan_deposito_transfer"
+        name="Laporan Transfer Bunga Deposito"
+        parent="laporan"
+        action="action_laporan_deposito_transfer"
+        groups="base.group_user"
+        sequence="4"/>
+
+
+    <menuitem id="menu_daftar_anggota"
+      name="Master Data Anggota"
+      parent="data_master_1"
+      action="master_amggota_action"
+      groups="base.group_user"
+      sequence="1"/>
+    <menuitem id="menu_master_jenis_tabungan"
+      name="Master Jenis Tabungan"
+      parent="data_master_1"
+      action="action_master_jenis_tabungan"
+      groups="base.group_user"
+      sequence="2"/>
+    <menuitem id="menu_master_jenis_deposito"
+      name="Master Jenis Simpanan Berjangka"
+      parent="data_master_1"
+      action="action_master_jenis_deposito"
+      groups="base.group_user"
+      sequence="3"/>
+    <menuitem id="menu_asal_perusahaan"
+      name="Master Asal Perusahaan"
+      parent="data_master_1"
+      action="action_asal_perusahaan"
+      groups="base.group_user"
+      sequence="4"/>
+
+    <menuitem id="menu_settings"
+      name="Settings"
+      parent="config_1"
+      action="action_settings"
+      groups="base.group_no_one"
+      sequence="1"/>
+    <!--<menuitem id="menu_schedule"-->
+      <!--name="Schedule Otomatis"-->
+      <!--parent="config_1"-->
+      <!--action="action_schedule_otomatis"-->
+      <!--groups="base.group_no_one"-->
+      <!--sequence="4"/>-->
+
+
+   </data>
+</odoo>

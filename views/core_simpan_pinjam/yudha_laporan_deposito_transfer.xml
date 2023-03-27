@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <record id="view_laporan_deposito_transfer_tree" model="ir.ui.view">
+            <field name="name">yudha.laporan.deposito.transfer.tree</field>
+            <field name="model">yudha.deposito.details.transfer</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Laporan Transfer Bunga Deposito">
+                    <field name="depo_id"/>
+                    <field name="docnum"/>
+                    <field name="partner_id"/>
+                    <field name="no_agt"/>
+                    <field name="no_rek_agt"/>
+                    <field name="atasnama"/>
+                    <field name="nm_bank"/>
+                    <field name="bulan_ke"/>
+                    <field name="date_trans"/>
+                    <field name="bayar_bunga"/>
+                    <field name="jml_bunga"/>
+                    <field name="rencana_bayar"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- pivot -->
+        <record id="laporan_deposito_transfer_pivot" model="ir.ui.view">
+            <field name="name">laporan_deposito_transfer_pivot</field>
+            <field name="model">yudha.deposito.details.transfer</field>
+            <field name="arch" type="xml">
+                <pivot string="Transfer Bunga Deposito">
+                    <field name="nm_bank" type ="row"/>
+                    <field name="partner_id" type ="row"/>
+                    <field name="jml_bunga" type="measure"/>
+                    <field name="jml_pajak" type="measure"/>
+                    <field name="rencana_bayar" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <record id="paperformat_tabungan_Validasi" model="report.paperformat">
+            <field name="name">Tabungan Validasi</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">35</field>
+            <field name="dpi">80</field>
+        </record>
+        <report id="report_tabungan_validasi_pdf"
+        	string="Tabungan Validasi"
+        	model="yudha.tabungan"
+        	report_type="qweb-pdf"
+        	name="yudha_simpan_pinjam.tabungan_validasi_report"
+        	file="yudha_simpan_pinjam.tabungan_validasi_report"
+        	menu="False"
+            paperformat="yudha_simpan_pinjam.paperformat_tabungan_Validasi"/>
+
+        <template id="tabungan_validasi_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+            <t t-call="web.external_layout">
+                <div style="font-Size:10px;" class="page">
+                    <h1>
+                       <div style="font-Size:16px;text-align: center;text-decoration: underline;font-weight:bold;">Tabungan Validasi</div>
+                       <div style="font-Size:10px;text-align: right;">Nama Anggota : <span t-esc="doc['partner_id']"/></div>
+                       <div style="font-Size:10px;text-align: right;">Nomor Anggota : <span t-esc="doc['no_agt']"/></div>
+                    </h1>
+                    <table class="table table-condensed table-striped">
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>SANDI</th>
+                            <th class="text-center" colspan="2">MUTASI</th>
+                            <th class="text-center">SALDO(Rupiah</th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>DEBIT</td>
+                            <td>CREDIT</td>
+                            <td></td>
+                        </tr>
+                        <t t-set="total_pokok" t-value="0"/>
+                        <tr>
+                            <td><span t-esc="doc['tgl_trans']"/></td>
+                            <td><span t-esc="doc['code_trans']"/></td>
+                            <td class="text-right"><span t-esc="doc['debit']"/></td>
+                            <td class="text-right"><span t-esc="doc['credit']"/></td>
+                            <td class="text-right"><span t-esc="doc['balance_akhir']"/></td>
+                        </tr>
+                    </table>
+                    <table class="table">
+                        <tr>
+                            <th/>
+                            <th/>
+                            <th/>
+                            <th/>
+                            <th/>
+                            <th>Bontang, <span t-esc="doc['tgl_trans']" t-field-options="{&quot;format&quot;:&quot;dd-MMM-Y&quot;}"/></th>
+                        </tr>
+                        <tr>
+                            <th/>
+                            <th/>
+                            <th>Manager</th>
+                            <th> </th>
+                            <th/>
+                            <th class="col-xs-3">Ka. Unit Simpan Pinjam</th>
+                        </tr>
+                        <tr>
+                            <td style="padding-top:100px">                      </td>
+                            <td style="padding-top:100px">                      </td>
+                            <td style="padding-top:100px">......................</td>
+                            <td style="padding-top:100px">                      </td>
+                            <td style="padding-top:100px">                      </td>
+                            <td style="padding-top:100px">......................</td>
+                        </tr>
+                        <tr>
+                            <td>                        </td>
+                            <td>                        </td>
+                            <td>      Junaid Gurdan     </td>
+                            <td>                        </td>
+                            <td>                        </td>
+                            <td>       Puji Sadarmi     </td>
+
+                        </tr>
+                    </table>
+                    <div class="oe_structure"/>
+                </div>
+            </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

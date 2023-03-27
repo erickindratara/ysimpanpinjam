@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+            <record id="yudha_validasi_sembako_tree" model="ir.ui.view">
+                <field name="name">yudha.validasi.sembako.tree</field>
+                <field name="model">yudha.validasi.sembako</field>
+                <field name="type">tree</field>
+                <field name="priority" eval="8"/>
+                <field name="arch" type="xml">
+                    <tree string="Validasi sembako">
+                         <field name="jns_dok" />
+                         <field name="no_val"/>
+                         <field name="confirm_by"/>
+                         <field name="start_date"/>
+                         <field name="end_date"/>
+                         <field name="keterangan"/>
+                         <field name="state"/>
+                    </tree>
+                </field>
+            </record>
+            <record id="yudha_validasi_sembako_form" model="ir.ui.view">
+                <field name="name">yudha.validasi.sembako.form</field>
+                <field name="model">yudha.validasi.sembako</field>
+                <field name="type">form</field>
+                <field name="priority" eval="8"/>
+                <field name="arch" type="xml">
+                    <form string="Master Validasi Sembako">
+                        <header>
+                               <button name="confirm" string="Confirm" type="object" states="draft"/>
+                               <field  name="state" widget="statusbar" statusbar_colors='{"draft":"blue"}'/>
+                        </header>
+                        <sheet string="Validasi Sembako">
+                             <group colspan="2">
+                                 <field name="jns_dok" />
+                                 <field name="no_val"/>
+                                 <field name="confirm_by"/>
+                                 <field name="start_date"/>
+                                 <field name="end_date"/>
+                                 <field name="keterangan"/>
+                             </group>
+                             <notebook>
+                                  <page string="Summary">
+                                      <field name="summary_ids">
+                                          <tree string="Summary Kredit Sembako" create="false" delete="false" editable="bottom">
+                                                <field name="partner_id"/>
+                                                <field name="no_anggota"/>
+                                                <field name="npk"/>
+                                                <field name="unit_kerja"/>
+                                                <field name="asal_pt"/>
+                                                <field name="amount"/>
+                                                <field name="realisasi"/>
+                                                <field name="state" invisible="1"/>
+                                          </tree>
+                                      </field>
+                                  </page>
+                                  <page string="Detail Pembelian">
+                                      <field name="detail_ids">
+                                          <tree string="Detail Pembelian" create="false" delete="false" editable="bottom">
+                                                <field name="pos_id"/>
+                                                <field name="partner_id"/>
+                                                <field name="date"/>
+                                                <field name="product_id"/>
+                                                <field name="price_unit"/>
+                                                <field name="qty"/>
+                                                <field name="discount"/>
+                                                <field name="tax"/>
+                                                <field name="total_amount"/>
+                                          </tree>
+                                      </field>
+                                  </page>
+                                  <page string="Detail Payment">
+                                      <field name="payment_ids">
+                                          <tree string="Detail Payment" create="false" delete="false" editable="bottom">
+                                                <field name="pos_id" />
+                                                <field name="payment_id" invisible="1"/>
+                                                <field name="partner_id"/>
+                                                <field name="date"/>
+                                                <field name="ref" />
+                                                <field name="amount"/>
+                                                <field name="keterangan" />
+                                          </tree>
+                                      </field>
+                                  </page>
+                             </notebook>
+                         </sheet>
+                    </form>
+                </field>
+            </record>
+     </data>
+</odoo>

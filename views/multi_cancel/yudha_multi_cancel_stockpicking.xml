@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+	<data>
+	<record id="yudha_multi_cancel_stock_picking_inherit_view_form" model="ir.ui.view">
+		<field name="name">yudha_multi_cancel_stock_picking_inherit_view_form</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="stock.view_picking_form"/>
+		<field name="arch" type="xml">
+		<xpath expr="//button[@name='button_validate']" position="after">
+			<button name="batal_stock_picking"  string="Cancel Picking" type="object" attrs="{'invisible': [('state', 'not in', ('done'))]}"/>
+		</xpath>
+		</field>
+	</record>
+	<record id="yudha_multi_cancel_stock_move_line_view_tree" model="ir.ui.view">
+		<field name="name">yudha_multi_cancel_stock_move_line_inherit_view_tree</field>
+		<field name="model">stock.move.line</field>
+		<field name="inherit_id" ref="stock.view_move_line_tree"/>
+		<field name="arch" type="xml">
+		<xpath expr="//field[@name='reference']" position="before">
+			<field name="cancel_remark" readonly="1"/>
+		</xpath>
+		</field>
+	</record>
+	<record id="yudha_multi_cancel_stock_move_line_view_form" model="ir.ui.view">
+		<field name="name">yudha_multi_cancel_stock_move_line_inherit_view_form</field>
+		<field name="model">stock.move.line</field>
+		<field name="inherit_id" ref="stock.view_move_line_form"/>
+		<field name="arch" type="xml">
+		<xpath expr="//field[@name='lot_id']" position="after">
+			<field name="cancel_remark" readonly="1"/>
+		</xpath>
+		</field>
+	</record>
+	</data>
+</odoo>

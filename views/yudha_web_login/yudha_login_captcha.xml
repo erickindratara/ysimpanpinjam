@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <template id="assets_frontend_captcha" inherit_id="web.assets_frontend" name="Assets Frontend Captcha">
+        <xpath expr="." position="inside">
+             <script src='https://www.google.com/recaptcha/api.js'></script>
+             <script type="text/javascript" src="/yudha_simpan_pinjam/static/src/js/google_captcha/yudha_google_captcha.js"></script>
+
+        </xpath>
+    </template>
+</odoo>

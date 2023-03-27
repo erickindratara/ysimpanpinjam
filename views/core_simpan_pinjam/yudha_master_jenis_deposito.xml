@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <record id="view_master_jenis_deposito_tree" model="ir.ui.view">
+            <field name="name">yudha.master.jenis.deposito.tree</field>
+            <field name="model">yudha.master.jenis.deposito</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Master Jenis Deposito">
+                    <field name="name"/>
+                    <field name="jangka_waktu"/>
+                    <field name="akun_coa"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="rate_deposito_tree_view" model="ir.ui.view">
+            <field name="name">rate_deposito_tree_view</field>
+            <field name="model">yudha.rate.deposito</field>
+            <field name="arch" type="xml">
+                <tree default_order="tgl_input" editable="bottom">
+                    <field name="depo_id" invisible="1" />
+                    <field name="tgl_input"/>
+                    <field name="rate_depo"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_tampil_rate" model="ir.actions.act_window">
+            <field name="name">Rate Deposito</field>
+            <field name="res_model">yudha.rate.deposito</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[('depo_id','in',(depo_id))]</field>
+            <field name="view_id" ref="rate_deposito_tree_view"/>
+            <field name="target">new</field>
+        </record>
+
+        <!-- form -->
+        <record id="view_master_jenis_deposito_form" model="ir.ui.view">
+            <field name="name">yudha.master.jenis.deposito.form</field>
+            <field name="model">yudha.master.jenis.deposito</field>
+            <field name="type">form</field>
+            <field name="priority" eval="7"/>
+            <field name="arch" type="xml">
+                <form string="Master Jenis Deposito" >
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="tampil_rate" type="object" string="Rates" context="{'depo_ids': [id]}" class="oe_stat_button" icon="fa-file-text"/>
+                            <!--<button name="%(action_tampil_rate)d" type='action' string="Rates" context="{'depo_id': [id]}" class="oe_stat_button" icon="fa-file-text"/>-->
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="state" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                             </button>
+                        </div>
+                        <group string="">
+                            <field name="name"/>
+                            <field name="jangka_waktu"/>
+                            <field name="akun_coa" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}" widget="selection"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

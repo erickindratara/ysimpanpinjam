@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+	<record id="product_ecommerce_view_tree" model="ir.ui.view">
+		<field name="name">product.ecommerce.view.tree</field>
+		<field name="model">product.ecommerce</field>
+		<field name="arch" type="xml">
+			<tree string="Master eCommerce List">
+				<field name="name"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="product_ecommerce_view_form" model="ir.ui.view">
+		<field name="name">product.ecommerce.view.form</field>
+		<field name="model">product.ecommerce</field>
+		<field name="arch" type="xml">
+			<form string="Master eCommerce Form">
+				<sheet>
+					<group>
+						<field name="name"/>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+</odoo>

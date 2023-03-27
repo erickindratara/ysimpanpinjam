@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data noupdate="1">
+        <record id="seq_val_iuran_pokok" model="ir.sequence">
+            <field name="name">yudha Iuran Pokok</field>
+            <field name="code">yudha.iuran.pokok.validasi</field>
+            <field name="prefix">KOPKARIP/%(year)s/</field>
+            <field name="padding">10</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="seq_val_iuran_wajib" model="ir.sequence">
+            <field name="name">yudha Iuran Wajib</field>
+            <field name="code">yudha.iuran.wajib.validasi</field>
+            <field name="prefix">KOPKARWJB/%(year)s/</field>
+            <field name="padding">10</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="seq_val_iuran_sukarela" model="ir.sequence">
+            <field name="name">yudha Iuran Sukarela</field>
+            <field name="code">yudha.iuran.sukarela.validasi</field>
+            <field name="prefix">KOPKARSUK/%(year)s/</field>
+            <field name="padding">10</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="seq_val_tabungan" model="ir.sequence">
+            <field name="name">yudha Tabungan</field>
+            <field name="code">yudha.validasi.tabungan.1</field>
+            <field name="prefix">KOPKARTAB/%(year)s/</field>
+            <field name="padding">10</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="seq_val_harian" model="ir.sequence">
+            <field name="name">yudha validasi harian</field>
+            <field name="code">yudha.validasi.harian.1</field>
+            <field name="prefix">KOPKARVALHAR/%(year)s/</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="seq_val_bulanan" model="ir.sequence">
+            <field name="name">yudha validasi bulanan</field>
+            <field name="code">yudha.validasi.bulanan.1</field>
+            <field name="prefix">KOPKARVALBLN/%(year)s/</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="seq_val_laporan_harian" model="ir.sequence">
+            <field name="name">yudha laporan harian</field>
+            <field name="code">yudha.laporan.harian.1</field>
+            <field name="prefix">KOPKARLAPHAR/%(year)s/</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="seq_val_laporan_detail_anggota" model="ir.sequence">
+            <field name="name">yudha laporan detail anggota</field>
+            <field name="code">yudha.laporan.detail.anggota.1</field>
+            <field name="prefix">KOPKARLAPDETAGT/%(year)s/</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+    </data>
+</odoo>

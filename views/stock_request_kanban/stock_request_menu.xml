@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+
+    <menuitem id="stock_request_kanban_menu"
+              name="Kanban cards"
+              parent="yudha_simpan_pinjam.menu_stock_request_master_data"
+              action="stock_request_kanban_action"
+              sequence="110"/>
+
+    <menuitem id="menu_wizard_stock_request_kanban"
+              name="Request from Kanban cards"
+              parent="yudha_simpan_pinjam.menu_stock_request_operations"
+              action="wizard_stock_request_kanban_action"
+              sequence="40"/>
+
+    <menuitem id="menu_wizard_stock_inventory_kanban"
+              name="Inventory"
+              parent="yudha_simpan_pinjam.menu_stock_request_operations"
+              action="stock_inventory_kanban_action"
+              sequence="60"/>
+</odoo>

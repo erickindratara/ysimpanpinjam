@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+	<data>
+	<record id="yudha_multi_cancel_mrp_production_inherit_view_form" model="ir.ui.view">
+		<field name="name">yudha_multi_cancel_mrp_production_inherit_view_form</field>
+		<field name="model">mrp.production</field>
+		<field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+		<field name="arch" type="xml">
+		<xpath expr="//button[@name='action_cancel']" position="replace">
+            <button name="action_cancel" type="object" string="Cancel" attrs="{'invisible': ['|', ('is_locked', '=', True),('state', 'in', ('cancel'))]}"/>
+		</xpath>
+		</field>
+	</record>
+	</data>
+</odoo>

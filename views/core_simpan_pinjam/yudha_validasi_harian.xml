@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+            <record id="yudha_validasi_harian_tree" model="ir.ui.view">
+                <field name="name">yudha.validasi.harian.tree</field>
+                <field name="model">yudha.validasi.harian</field>
+                <field name="type">tree</field>
+                <field name="priority" eval="8"/>
+                <field name="arch" type="xml">
+                    <tree string="Validasi Harian">
+                         <field name="confirm_by"/>
+                         <field name="jns_dok" />
+                         <field name="no_val"/>
+                         <field name="tgl_val"/>
+                         <field name="keterangan"/>
+                         <field name="state"/>
+                    </tree>
+                </field>
+            </record>
+            <record id="yudha_validasi_harian_form" model="ir.ui.view">
+                <field name="name">yudha.validasi.harian.form</field>
+                <field name="model">yudha.validasi.harian</field>
+                <field name="type">form</field>
+                <field name="priority" eval="8"/>
+                <field name="arch" type="xml">
+                    <form string="Master Validasi Harian">
+                        <header>
+                               <button name="validate" string="Validation" type="object" states="ready"/>
+                               <field  name="state" widget="statusbar" statusbar_visible="ready,done" statusbar_colors='{"done":"blue"}'/>
+                        </header>
+                        <sheet string="ValidasiHarian">
+                             <group>
+                                 <field name="confirm_by"/>
+                                 <field name="jns_dok" />
+                                 <field name="no_val"/>
+                                 <field name="tgl_val" widget="date"/>
+                                 <field name="keterangan"/>
+                             </group>
+                             <notebook>
+                                  <page string="Simpanan Pokok">
+                                      <field name="valsimpok_ids" widget="one2many_list"  create="false" editable="bottom" >
+                                          <tree string="Detail Validasi Harian" create="false" editable="bottom">
+                                                <field name="no_trans"/>
+                                                <field name="no_accmove"/>
+                                                <field name="tunai"/>
+                                                <field name="transfer"/>
+                                                <field name="jns_trans"/>
+                                                <field name="no_rek_agt"/>
+                                                <field name="nm_bank"/>
+                                                <field name="atas_nama"/>
+                                                <field name="no_rek"/>
+                                          </tree>
+                                      </field>
+                                  </page>
+                                  <page string="Simpanan Sukarela">
+                                      <field name="valsimsuka_ids" widget="one2many_list"  create="false" editable="bottom" >
+                                          <tree string="Detail Validasi Harian" create="false" editable="bottom">
+                                                <field name="no_trans"/>
+                                                <field name="no_accmove"/>
+                                                <field name="tunai"/>
+                                                <field name="transfer"/>
+                                                <field name="jns_trans"/>
+                                                <field name="no_rek_agt"/>
+                                                <field name="nm_bank"/>
+                                                <field name="atas_nama"/>
+                                                <field name="no_rek"/>
+                                          </tree>
+                                      </field>
+                                  </page>
+                                  <page string="Tabungan">
+                                      <field name="valtab_ids" widget="one2many_list"  create="false" editable="bottom" >
+                                          <tree string="Detail Validasi Harian" create="false" editable="bottom">
+                                                <field name="no_trans"/>
+                                                <field name="jns_tab"/>
+                                                <field name="no_accmove"/>
+                                                <field name="tunai"/>
+                                                <field name="transfer"/>
+                                                <field name="jns_trans"/>
+                                                <field name="no_rek_agt"/>
+                                                <field name="nm_bank"/>
+                                                <field name="atas_nama"/>
+                                                <field name="no_rek"/>
+                                          </tree>
+                                      </field>
+                                  </page>
+                                  <page string="Simpanan Berjangka">
+                                      <field name="valdepo_ids" widget="one2many_list"  create="false" editable="bottom" >
+                                          <tree string="Detail Validasi Harian" create="false" editable="bottom">
+                                                <field name="valdepo_id" invisible="1" />
+                                                <field name="no_trans"/>
+                                                <field name="jns_depo"/>
+                                                <field name="no_accmove"/>
+                                                <field name="tunai"/>
+                                                <field name="transfer"/>
+                                                <field name="jns_trans"/>
+                                                <field name="no_rek_agt"/>
+                                                <field name="nm_bank"/>
+                                                <field name="atas_nama"/>
+                                                <field name="no_rek"/>
+                                          </tree>
+                                      </field>
+                                  </page>
+                                 <page string="Peminjaman">
+                                      <field name="valpinjam_ids" widget="one2many_list"  create="false" editable="bottom" >
+                                          <tree string="Detail Validasi Harian" create="false" editable="bottom">
+                                                <field name="docnum"/>
+                                                <field name="tgl_trans"/>
+                                                <field name="partner_id"/>
+                                                <field name="no_agt"/>
+                                                <field name="jml_pinjam"/>
+                                                <field name="keterangan"/>
+                                                <field name="nm_trans"/>
+                                          </tree>
+                                      </field>
+                                  </page>
+                                 <page string="Pelunasan Pinjaman">
+                                      <field name="vallunas_ids" widget="one2many_list"  create="false" editable="bottom" >
+                                          <tree string="Detail Validasi Harian" create="false" editable="bottom">
+                                                <field name="date_pay"/>
+                                                <field name="loan_id"/>
+                                                <field name="asal_dana"/>
+                                                <field name="partner_id"/>
+                                                <field name="no_agt"/>
+                                                <field name="date_loan"/>
+                                                <field name="amount"/>
+                                                <field name="payment_type"/>
+                                          </tree>
+                                      </field>
+                                  </page>
+                             </notebook>
+                         </sheet>
+                    </form>
+                </field>
+            </record>
+     </data>
+</odoo>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <record id="view_settings_tree" model="ir.ui.view">
+            <field name="name">view_settings_tree</field>
+            <field name="model">yudha.settings</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Settings">
+                    <field name="simp_pokok"/>
+                    <field name="simp_wajib"/>
+                    <field name="pot_gaji"/>
+                    <field name="pot_thr"/>
+                    <field name="pot_ik"/>
+                    <field name="pot_jasop"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- form -->
+        <record id="view_settings_form" model="ir.ui.view">
+            <field name="name">view_settings_form</field>
+            <field name="model">yudha.settings</field>
+            <field name="type">form</field>
+            <field name="priority" eval="7"/>
+            <field name="arch" type="xml">
+                <form string="Settings" >
+                    <sheet>
+                        <group>
+                            <group string="Jumlah Simpanan">
+                                <field name="simp_pokok"/>
+                                <field name="simp_wajib"/>
+                            </group>
+                            <group string="Company">
+                                <field name="comp_usp"/>
+                                <field name="comp_ho"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Chart of Account USP (Validasi Bulanan)">
+                                <field name="coa_tagihan_bulanan"/>
+                                <field name="coa_simp_pokok"/>
+                                <field name="coa_simp_wajib"/>
+                                <field name="coa_simp_sukarela"/>
+                                <field name="coa_tabungan_anggota"/>
+                                <field name="coa_piutang_anggota"/>
+                                <field name="coa_jasa_pinjaman"/>
+                                <field name="coa_kliring_usp"/>
+                            </group>
+                            <group string="Chart of Account USP (Default Payment)">
+                                <field name="coa_kliring_pinjaman"/>
+                                <field name="coa_kliring_tarikan"/>
+                            </group>
+                            <group string="Bunga Deposito">
+                                <field name="jenis_tabungan"/>
+                                <field name="journal_id"/>
+                                <field name="coa_depo_bebanjasa"/>
+                                <field name="coa_depo_kliring_transfer"/>
+                                <field name="coa_depo_pajak"/>
+                            </group>
+                            <group string="Bunga Tabungan">
+                                <field name="journal_id_tab"/>
+                                <field name="coa_tab_bebanjasa"/>
+                                <field name="coa_tab_pajak"/>
+                                <field name="coa_tab_admin"/>
+                            </group>
+                            <group string="Chart of Account HO (Validasi Bulanan)">
+                                <field name="coa_simp_pokok_ho"/>
+                                <field name="coa_simp_wajib_ho"/>
+                                <field name="coa_simp_sukarela_ho"/>
+                                <field name="coa_kliring_ho"/>
+                            </group>
+                        </group>
+                        <group string="Porsi Potongan Pinjaman Syariah/KPR">
+                            <field name="pot_gaji"/>
+                            <field name="pot_thr"/>
+                            <field name="pot_ik"/>
+                            <field name="pot_jasop"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

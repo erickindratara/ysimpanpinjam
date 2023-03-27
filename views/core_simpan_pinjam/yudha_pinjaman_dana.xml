@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <record id="view_peminjaman_dana_tree" model="ir.ui.view">
+            <field name="name">yudha.peminjaman.dana.tree</field>
+            <field name="model">yudha.peminjaman.dana</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Peminjaman Tunai">
+                    <field name="docnum"/>
+                    <field name="tgl_minta"/>
+                    <field name="nama"/>
+                    <field name="tgl_lahir"/>
+                    <field name="no_anggota"/>
+                    <field name="unit_kerja"/>
+                    <field name="golongan"/>
+                    <field name="no_hp"/>
+                    <field name="jml_pinjaman"/>
+                    <!--<field name="jangka_waktu"/>-->
+                    <field name="keperluan"/>
+                    <field name="lainnya"/>
+                    <field name="tgl_approve"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- form -->
+        <record id="view_peminjaman_dana_form" model="ir.ui.view">
+            <field name="name">yudha.peminjaman.dana.form</field>
+            <field name="model">yudha.peminjaman.dana</field>
+            <field name="type">form</field>
+            <field name="priority" eval="7"/>
+            <field name="arch" type="xml">
+                <form string="Peminjaman Dana" >
+                    <header>
+                        <button string="Validate" type="object" name="validate" states="draft"/>
+                        <field  name="state" widget="statusbar" statusbar_visible="draft,confirm" statusbar_colors='{"confirm":"blue"}'/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="id" class="oe_edit_only" string="Peminjaman Dana"/>
+                        </div>
+                        <group string="">
+                            <field name="docnum"/>
+                            <field name="tgl_minta"/>
+                            <field name="nama"/>
+                            <field name="tgl_lahir"/>
+                            <field name="no_anggota"/>
+                            <field name="unit_kerja"/>
+                            <field name="golongan"/>
+                            <field name="no_hp"/>
+                            <field name="jml_pinjaman"/>
+                            <!--<field name="jangka_waktu"/>-->
+                            <field name="keperluan"/>
+                            <field name="lainnya"/>
+                            <field name="f_ktp"/>
+                            <field name="f_ktp"/>
+                            <field name="f_slip"/>
+                            <field name="rek_mandiri"/>
+                        </group>
+                        <!--<notebook>-->
+                              <!--<page string="Details">-->
+                                  <!--<field name="pinjamdana_ids" widget="one2many_list" >-->
+                                     <!--<tree string="Detail Angsuran">-->
+                                         <!--&lt;!&ndash;<field name="group_fish_ids"/>&ndash;&gt;-->
+                                         <!--&lt;!&ndash;<field name="type_fish_ids"/>&ndash;&gt;-->
+                                         <!--<field name="angsuran" />-->
+                                         <!--<field name="jatuh_tempo"/>-->
+                                         <!--<field name="tgl_lunas"/>-->
+                                         <!--<field name="pokok" />-->
+                                         <!--<field name="bunga"/>-->
+                                         <!--<field name="denda"/>-->
+                                         <!--<field name="bayar" />-->
+                                         <!--<field name="selisih"/>-->
+                                         <!--<field name="sisa_pokok"/>-->
+                                     <!--</tree>-->
+                                  <!--</field>-->
+                              <!--</page>-->
+                        <!--</notebook>-->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- pivot -->
+        <record id="peminjaman_dana_pivot" model="ir.ui.view">
+            <field name="name">yudha_peminjaman_dana_pivot</field>
+            <field name="model">yudha.peminjaman.dana</field>
+            <field name="arch" type="xml">
+                <pivot string="tgl_minta">
+                    <field name="tgl_minta" type ="row"/>
+                </pivot>
+            </field>
+        </record>
+
+    </data>
+</odoo>

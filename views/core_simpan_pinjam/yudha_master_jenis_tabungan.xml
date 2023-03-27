@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <record id="view_master_jenis_tabungan_tree" model="ir.ui.view">
+            <field name="name">yudha.master.jenis.tabungan.tree</field>
+            <field name="model">yudha.master.jenis.tabungan</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Master Jenis Tabungan">
+                    <field name="name"/>
+                    <field name="akun_coa"/>
+                    <field name="kode_tabungan"/>
+                    <field name="biaya_admin"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="rate_tabungan_tree_view" model="ir.ui.view">
+            <field name="name">rate_tabungan_tree_view</field>
+            <field name="model">yudha.rate.tabungan</field>
+            <field name="arch" type="xml">
+                <tree default_order="tgl_input" editable="bottom">
+                    <field name="tab_id" invisible="1" />
+                    <field name="tgl_input"/>
+                    <field name="rate_tab"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_tampil_rate" model="ir.actions.act_window">
+            <field name="name">Rate Tabungan</field>
+            <field name="res_model">yudha.rate.tabungan</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[('tab_id','in',(tab_id))]</field>
+            <field name="view_id" ref="rate_tabungan_tree_view"/>
+            <field name="target">new</field>
+        </record>
+
+        <!-- form -->
+        <record id="view_master_jenis_tabungan_form" model="ir.ui.view">
+            <field name="name">yudha.master.jenis.tabungan.form</field>
+            <field name="model">yudha.master.jenis.tabungan</field>
+            <field name="type">form</field>
+            <field name="priority" eval="7"/>
+            <field name="arch" type="xml">
+                <form string="Master Jenis Tabungan" >
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                             <button name="tampil_rate" type="object" context="{'tab_ids': [id]}" string="Rates" class="oe_stat_button" icon="fa-file-text"/>
+                             <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="state" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                             </button>
+                        </div>
+                        <group string="">
+                            <field name="name"/>
+                            <field name="akun_coa" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}" widget="selection"/>
+                            <field name="kode_tabungan"/>
+                            <field name="biaya_admin"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <record id="view_yudha_deposito_tree" model="ir.ui.view">
+            <field name="name">yudha.deposito.tree</field>
+            <field name="model">yudha.deposito</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Deposito">
+                    <field name="nm_trans"/>
+                    <field name="docnum"/>
+                    <field name="tgl_trans"/>
+                    <field name="jns_trans"/>
+                    <field name="partner_id"/>
+                    <field name="no_agt"/>
+                    <field name="jns_depo"/>
+                    <field name="jns_trans"/>
+                    <field name="asal_dana"/>
+                    <field name="no_rek_agt"/>
+                    <field name="nm_bank"/>
+                    <field name="atasnama"/>
+                    <field name="no_rek_bank"/>
+                    <field name="jml_depo"/>
+                    <field name="keterangan"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_pencairan_deposito_form" model="ir.ui.view">
+            <field name="name">yudha.pencairan.deposito.form</field>
+            <field name="model">yudha.pencairan.deposito</field>
+            <field name="arch" type="xml">
+                <form string="Pencairan" version="7">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="depo_id" invisible="1"/>
+                                <field name="tgl_depo"/>
+                                <field name="jatuh_tempo"/>
+                                <field name="jml_depo"/>
+                            </group>
+                            <group>
+                                <field name="date_trans" string="Tanggal Pencairan"/>
+                                <field name="type_bayar" />
+                                <field name="amount" />
+                                <field name="description" />
+                                <field name="state" invisible="1"  />
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string='Validate' name="post_pencairan_deposito" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_pencairan_deposito" model="ir.actions.act_window">
+            <field name="name">Pencairan</field>
+            <field name="res_model">yudha.pencairan.deposito</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_pencairan_deposito_form"/>
+            <field name="context">{'depo_ids': [(active_id)]}</field>
+            <field name="target">new</field>
+        </record>
+        
+        <!-- form -->
+        <record id="view_yudha_deposito_form" model="ir.ui.view">
+            <field name="name">yudha.deposito.form</field>
+            <field name="model">yudha.deposito</field>
+            <field name="type">form</field>
+            <field name="priority" eval="7"/>
+            <field name="arch" type="xml">
+                <form string="Deposito">
+                    <header>
+                       <field  name="state" widget="statusbar" statusbar_colors='{"deposit":"blue"}'/>
+                       <button name="%(action_pencairan_deposito)d" type='action' string='Pencairan Deposito' states='done' />
+                    </header>
+                    <sheet>
+                        <group string="">
+                            <field name="nm_trans"/>
+                            <field name="docnum"/>
+                            <field name="tgl_trans" widget="date" attrs="{'readonly': [('state','!=','ready')]}"/>
+                            <field name="no_agt"/>
+                            <field name="partner_id" attrs="{'readonly': [('state','!=','ready')]}" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            <field name="jns_depo" attrs="{'readonly': [('state','!=','ready')]}" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            <field name="bunga_depo"/>
+                            <field name="jangka_waktu"/>
+                            <field name="jatuh_tempo" attrs="{'readonly': [('state','!=','ready')]}"/>
+                            <field name="bayar_bunga" attrs="{'readonly': [('state','!=','ready')]}"/>
+                            <field name="no_rekening" attrs="{'invisible':[('bayar_bunga','!=','tabungan')],'readonly': [('state','!=','ready')]}" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            <field name="nama_rekening" attrs="{'invisible':[('bayar_bunga','!=','tabungan')],'readonly': [('state','!=','ready')]}"/>
+                            <field name="jns_trans" widget="radio" invisible="1"/>
+                            <field name="asal_dana" attrs="{'invisible':['|',('jns_trans', '=', 'TD')],'readonly': [('state','!=','ready')]}"/>
+                            <field name="no_rek_agt" attrs="{'invisible':[('bayar_bunga','=','tabungan')],'readonly': [('state','!=','ready')]}"/>
+                            <field name="nm_bank" attrs="{'invisible':[('bayar_bunga','=','tabungan')],'readonly': [('state','!=','ready')]}"/>
+                            <field name="atasnama" attrs="{'invisible':[('bayar_bunga','=','tabungan')],'readonly': [('state','!=','ready')]}"/>
+                            <field name="no_rek_bank" attrs="{'invisible':['|',('jns_trans','=','TD'),('asal_dana', '=', 'CS')],'readonly': [('state','!=','ready')]}" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            <field name="jml_depo" attrs="{'readonly': [('state','!=','ready')]}"/>
+                            <field name="keterangan"/>
+                        </group>
+                        <notebook>
+                            <page string="Detail Deposito" >
+                                <field name="depo_ids" attrs="{'readonly': [('state','!=','ready')]}">
+                                    <tree editable="bottom" string="Detail Deposito" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}">
+                                        <field name="bulan_ke" />
+                                        <field name="date_trans" />
+                                        <field name="jml_depo"/>
+                                        <field name="bayar_bunga" invisible="1"/>
+                                        <field name="jml_bunga"/>
+                                        <field name="jml_pajak"/>
+                                        <field name="rencana_bayar"/>
+                                        <field name="jml_actual"/>
+                                        <field name="description"/>
+                                        <field name="valid_harian" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- pivot -->
+        <record id="yudha_deposito_pivot" model="ir.ui.view">
+            <field name="name">yudha.deposito.pivot</field>
+            <field name="model">yudha.deposito</field>
+            <field name="arch" type="xml">
+                <pivot string="date">
+                    <field name="tgl_trans" type ="row"/>
+                </pivot>
+            </field>
+        </record>
+
+    </data>
+</odoo>

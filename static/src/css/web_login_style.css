@@ -1,0 +1,90 @@
+.container{
+    max-width: 100%;
+}
+#wrapwrap {
+    height:100%;
+}
+main{
+    height:100%;
+}
+#background{
+    height:100%;
+    display: block;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	-webkit-filter: blur(0px);
+	z-index: -1;
+}
+.body_login {
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    width: 100%;
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    opacity:0.7;
+}
+#mcard{
+    max-width: 400px;
+    height:100%;
+    padding: 3%;
+    margin-top: 3%;
+    position: relative;
+    margin: 50px auto;
+    background-color: white;
+}
+
+#bcard{
+    height:100%;
+    padding: 3%;
+    max-width: 400px;
+}
+.form-group {
+    // for the absolutely positioned meter on new password
+    position: relative;
+    margin-bottom: 1rem;
+    input.w-100 {
+        min-width: 100px;
+    }
+}
+.form-group.field-login {
+    position: relative;
+    width: 300px;
+}
+.form-group.field-password {
+  position: relative;
+  width: 300px;
+  meter.o_password_meter {
+    bottom: calc(#{$input-height} / 2 - 7px);
+  }
+}
+span.input-group-btn button.btn.btn-default {
+    outline: none;
+}
+.btn.btn-primary.btn-block {
+    width: 300px;
+}
+.body_login input,
+.body_login select {
+	background-color: transparent !important;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	border-bottom: 1px solid #FED766;
+	border-radius: 0px;
+	color: black;
+	font-size: 18px;
+	font-weight: 300;
+	transition: border-color 0.7s ease;
+	box-shadow: none!important;
+	text-align: center;
+}
+.effect:hover{
+    box-shadow: 5px 5px 5px black;
+}

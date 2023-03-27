@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+            <record id="yudha_validasi_deposito_tree" model="ir.ui.view">
+                <field name="name">yudha.validasi.deposito.tree</field>
+                <field name="model">yudha.validasi.deposito</field>
+                <field name="type">tree</field>
+                <field name="priority" eval="8"/>
+                <field name="arch" type="xml">
+                    <tree string="master-Validasi-Deposito">
+                         <field name="interdoc"/>
+                         <field name="tgl_val" />
+                         <field name="tgl_periode"/>
+                         <field name="confirm_by"/>
+                         <field name="state"/>
+                    </tree>
+                </field>
+            </record>
+            <record id="validasi_deposito_form" model="ir.ui.view">
+                <field name="name">yudha.validasi.deposito.form</field>
+                <field name="model">yudha.validasi.deposito</field>
+                <field name="type">form</field>
+                <field name="priority" eval="8"/>
+                <field name="arch" type="xml">
+                    <form string="Master Validasi Deposito">
+                        <header>
+                               <button name="validate" string="Validation" type="object" states="draft"/>
+                               <field  name="state" widget="statusbar" statusbar_visible="draft,confirm" statusbar_colors='{"confirm":"blue"}'/>
+
+                        </header>
+                        <sheet string="ValidasiDeposito">
+                             <div class="oe_title">
+                                <h1>io
+                                    <label for="confirm_by" class="oe_edit_only" string="Validasi Simpanan Berjangka"/>
+                                </h1>
+                             </div>
+                             <group>
+                                 <field name="confirm_by" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                 <field name="interdoc"/>
+                                 <field name="tgl_val" />
+                                 <field name="tgl_periode"/>
+                             </group>
+                             <notebook>
+                                  <page string="Details Item">
+                                      <field name="yudhadepo_ids" widget="one2many_list" >
+                                          <tree string="Detail Deposito" create="false" editable="bottom" >
+                                                <field name="date"/>
+                                                <field name="deposito_no"/>
+                                                <field name="partner_id"/>
+                                                <field name="lama_deposito"/>
+                                                <field name="bunga_dibayarkan"/>
+                                                <field name="bunga"/>
+                                                <field name="base_bunga"/>
+                                                <field name="recurring" />
+                                                <field name="debit" />
+                                                <field name="credit" />
+                                                <field name="keterangan"/>
+                                                <field name="status_deposito"/>
+                                          </tree>
+                                      </field>
+                                  </page>
+                             </notebook>
+                         </sheet>
+                    </form>
+                </field>
+            </record>
+     </data>
+</odoo>

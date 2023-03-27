@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <record id="view_peminjaman_konsumtif_tree" model="ir.ui.view">
+            <field name="name">yudha.peminjaman.konsumtif.tree</field>
+            <field name="model">yudha.peminjaman.konsumtif</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Peminjaman Konsumtif">
+                    <field name="nm_trans"/>
+                    <field name="docnum"/>
+                    <field name="tgl_trans"/>
+                    <field name="jns_trans"/>
+                    <field name="tgl_trans"/>
+                    <field name="jns_trans"/>
+                    <field name="partner_id"/>
+                    <field name="no_agt"/>
+                    <field name="npk"/>
+                    <field name="unit_kerja"/>
+                    <field name="jml_pinjam" />
+                    <field name="no_rek"/>
+                    <field name="dok_pend"/>
+                    <field name="keterangan"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_pelunasan_konsumtif_form" model="ir.ui.view">
+            <field name="name">yudha.pelunasan.konsumtif.form</field>
+            <field name="model">yudha.pelunasan.konsumtif</field>
+            <field name="arch" type="xml">
+                <form string="Pelunasan" version="7">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="loan_id" invisible="1"/>
+                                <field name="lama_cicilan" invisible="1"/>
+                                <field name="sisa_cicilan" invisible="1"/>
+                                <field name="last_paydate"/>
+                                <field name="sisa_loan"/>
+                                <field name="bunga"/>
+                            </group>
+                            <group>
+                                <field name="date_pay" string="Tanggal Pelunasan"/>
+                                <field name="description" />
+                                <field name="sumber_dana" />
+                                <field name="amount" />
+                                <field name="bunga_terhutang" />
+                                <field name="total_bayar" />
+                                <field name="state" invisible="1"  />
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string='Validate' name="post_pelunasan" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_pelunasan_konsumtif" model="ir.actions.act_window">
+            <field name="name">Pelunasan</field>
+            <field name="res_model">yudha.pelunasan.konsumtif</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_pelunasan_konsumtif_form"/>
+            <field name="context">{'loan_ids': [(active_id)]}</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- form -->
+        <record id="view_yudha_peminjaman_konsumtif_form" model="ir.ui.view">
+            <field name="name">yudha.peminjaman.konsumtif.form</field>
+            <field name="model">yudha.peminjaman.konsumtif</field>
+            <field name="type">form</field>
+            <field name="priority" eval="7"/>
+            <field name="arch" type="xml">
+                <form string="Peminjaman konsumtif">
+                    <header>
+                        <field  name="state" widget="statusbar" statusbar_visible="draft,valid,paid,done" statusbar_colors='{"done":"blue"}'/>
+                        <button name="%(action_pelunasan_konsumtif)d" type='action' string='Pelunasan' states='paid' />
+                    </header>
+                    <sheet>
+                        <group string="Data Anggota">
+                            <field name="nm_trans"/>
+                            <field name="docnum"/>
+                            <field name="jns_trans" widget="radio" invisible="1"/>
+                            <field name="partner_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}" widget="selection" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="no_agt"/>
+                            <field name="npk" />
+                            <field name="unit_kerja"/>
+                            <field name="no_rek" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="dok_pend" widget="many2many_binary"/>
+                            <field name="keterangan"/>
+                        </group>
+                        <group string="Data Pinjaman" col="4" colspan="3">
+                            <group>
+                                <field name="tgl_trans" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="jml_pinjam" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="lama_cicilan" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="bunga" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="type_bunga"/>
+                            </group>
+                            <group>
+                                <field name="date_start" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="date_bayar" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="date_end" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="date_pelunasan" readonly="1" attrs="{'invisible': [('jml_pelunasan','=',0)]}"/>
+                                <field name="jml_pelunasan" readonly="1" attrs="{'invisible': [('jml_pelunasan','=',0)]}"/>
+                                <field name="ket_lunas" readonly="1" attrs="{'invisible': [('jml_pelunasan','=',0)]}"/>
+                            </group>
+                            <group>
+                                <field name="last_paydate"/>
+                                <field name="jml_cicilan_view"/>
+                                <field name="jml_cicilan" invisible="1"/>
+                                <field name="jml_bayar" />
+                                <field name="sisa_loan" />
+                                <field name="sisa_cicilan" />
+                            </group>
+                            <group>
+                                <field name="pot_thr"/>
+                                <field name="pot_ik"/>
+                                <field name="pot_jasop"/>
+                            </group>
+
+                        </group>
+                        <notebook>
+                            <page string="Detail Pinjaman" >
+                                <field name="pay_ids" attrs="{'readonly': [('state','!=','draft')]}">
+                                    <tree editable="bottom" string="Detail Pembayaran" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}">
+                                        <field name="cicilan_ke" />
+                                        <field name="date_pay" />
+                                        <field name="description"/>
+                                        <field name="doc_type"/>
+                                        <field name="type_pelunasan"/>
+                                        <field name="jml_pokok"/>
+                                        <field name="jml_bunga"/>
+                                        <field name="rencana_cicilan"/>
+                                        <field name="jml_cicilan"/>
+                                        <field name="saldo_pinjaman"/>
+                                        <field name="valid_harian" invisible="1"/>
+                                        <field name="valid_bulanan" invisible="1"/>
+                                        <field name="move_id" invisible="1"/>
+                                        <field name="payment_id" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- pivot -->
+        <record id="yudha_peminjaman_konsumtif_pivot" model="ir.ui.view">
+            <field name="name">yudha.peminjaman.konsumtif.pivot</field>
+            <field name="model">yudha.peminjaman.konsumtif</field>
+            <field name="arch" type="xml">
+                <pivot string="date">
+                    <field name="tgl_trans" type ="row"/>
+                </pivot>
+            </field>
+        </record>
+
+    </data>
+</odoo>

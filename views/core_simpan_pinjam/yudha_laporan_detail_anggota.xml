@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <record id="view_laporan_detail_anggota_tree" model="ir.ui.view">
+            <field name="name">yudha.laporan.detail.anggota.tree</field>
+            <field name="model">yudha.laporan.detail.anggota</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Laporan Detail Anggota">
+                    <field name="nm_trans"/>
+                    <field name="docnum"/>
+                    <field name="tgl_lap"/>
+                    <field name="partner_id"/>
+                    <field name="no_agt"/>
+                    <field name="npk"/>
+                    <field name="unit_kerja"/>
+                    <field name="tgl_dari"/>
+                    <field name="tgl_sampai"/>
+                    <field name="jns_trans"/>
+                    <field name="ket"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- form -->
+        <record id="view_laporan_detail_anggota_form" model="ir.ui.view">
+            <field name="name">yudha.laporan.detail.anggota.form</field>
+            <field name="model">yudha.laporan.detail.anggota</field>
+            <field name="type">form</field>
+            <field name="priority" eval="7"/>
+            <field name="arch" type="xml">
+                <form string="Laporan Detail Anggota">
+                    <header>
+                           <button name="validate" string="Validation" type="object" states="ready"/>
+                           <field  name="state" widget="statusbar" statusbar_visible="ready,done" statusbar_colors='{"done":"blue"}'/>
+                    </header>
+                    <sheet>
+                        <group string="">
+                            <field name="nm_trans"/>
+                            <field name="docnum"/>
+                            <field name="tgl_lap" widget="date"/>
+                            <field name="partner_id"/>
+                            <field name="no_agt"/>
+                            <field name="npk"/>
+                            <field name="unit_kerja"/>
+                            <field name="tgl_dari"/>
+                            <field name="tgl_sampai"/>
+                            <field name="jns_trans"/>
+                            <field name="ket"/>
+                        </group>
+                         <notebook>
+                              <page string="Simpanan Pokok">
+                                  <field name="lpdetsimpok_ids" widget="one2many_list"  create="false" editable="bottom" >
+                                      <tree string="Laporan Anggota Detail Simpok" create="false" editable="bottom">
+                                          <field name="no_trans"/>
+                                          <field name="jml"/>
+                                          <field name="jml_total"/>
+                                          <field name="state"/>
+                                      </tree>
+                                  </field>
+                              </page>
+                              <page string="Simpanan Sukarela">
+                                  <field name="lpdetsimsuka_ids" widget="one2many_list"  create="false" editable="bottom" >
+                                      <tree string="Laporan Anggota Detail Sukarela" create="false" editable="bottom">
+                                            <field name="no_trans"/>
+                                            <field name="jml"/>
+                                            <field name="jml_total"/>
+                                            <field name="state"/>
+                                      </tree>
+                                  </field>
+                              </page>
+                              <page string="Simpanan Wajib">
+                                  <field name="lpdetsimwjb_ids" widget="one2many_list"  create="false" editable="bottom" >
+                                      <tree string="Laporan Anggota Detail Wajib" create="false" editable="bottom">
+                                             <field name="no_trans"/>
+                                             <field name="jml"/>
+                                             <field name="jml_total"/>
+                                             <field name="state"/>
+                                      </tree>
+                                  </field>
+                              </page>
+                              <page string="Tabungan">
+                                  <field name="lpdettab_ids" widget="one2many_list"  create="false" editable="bottom" >
+                                      <tree string="Laporan Anggota Detail Tabungan" create="false" editable="bottom">
+                                             <field name="no_trans"/>
+                                             <field name="jml"/>
+                                             <field name="jml_total"/>
+                                             <field name="state"/>
+                                      </tree>
+                                  </field>
+                              </page>
+                              <page string="Simpanan Berjangka">
+                                  <field name="lpdetdepo_ids" widget="one2many_list"  create="false" editable="bottom" >
+                                      <tree string="Laporan Anggota Detail Deposito" create="false" editable="bottom">
+                                             <field name="no_trans"/>
+                                             <field name="jml"/>
+                                             <field name="jml_total"/>
+                                             <field name="state"/>
+                                      </tree>
+                                  </field>
+                              </page>
+                              <page string="Peminjaman Dana">
+                                  <field name="lpdetpinjdana_ids" widget="one2many_list"  create="false" editable="bottom" >
+                                      <tree string="Laporan Anggota Detail Wajib" create="false" editable="bottom">
+                                             <field name="no_trans"/>
+                                             <field name="jml"/>
+                                             <field name="jml_total"/>
+                                             <field name="state"/>
+                                      </tree>
+                                  </field>
+                              </page>
+                         </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- pivot -->
+        <record id="laporan_detail_anggota_pivot" model="ir.ui.view">
+            <field name="name">laporan_detail_anggota_pivot</field>
+            <field name="model">yudha.laporan.detail.anggota</field>
+            <field name="arch" type="xml">
+                <pivot string="date">
+                    <field name="tgl_lap" type ="row"/>
+                </pivot>
+            </field>
+        </record>
+
+    </data>
+</odoo>

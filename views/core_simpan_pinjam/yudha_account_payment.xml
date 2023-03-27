@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_pinjaman_account_payment_form">
+            <field name="name">	view_pinjaman_account_payment_form</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <field name="payment_transaction_id" position="after">
+                    <field name="loan_type" attrs="{'readonly':[('state','!=','draft')]}"/>
+                    <field name="dana_id" attrs="{'invisible':[('loan_type','!=','dana')],'readonly':[('state','!=','draft')]}" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                    <field name="barang_id" attrs="{'invisible':[('loan_type','!=','barang')],'readonly':[('state','!=','draft')]}" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                    <field name="konsumtif_id" attrs="{'invisible':[('loan_type','!=','konsumtif')],'readonly':[('state','!=','draft')]}" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                    <field name="syariah_id" attrs="{'invisible':[('loan_type','!=','syariah')],'readonly':[('state','!=','draft')]}" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                    <field name="deposito_id" attrs="{'invisible':[('loan_type','!=','tarikan_deposito')],'readonly':[('state','!=','draft')]}" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                    <field name="tabungan_id" attrs="{'invisible':[('loan_type','!=','tarikan_tabungan')],'readonly':[('state','!=','draft')]}" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

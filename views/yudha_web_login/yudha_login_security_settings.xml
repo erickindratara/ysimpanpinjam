@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <record
+                id="res_config_settings_view_form_login_security"
+                model="ir.ui.view">
+            <field name="name">res.config.settings.form.inherit</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='web_login']" position="after">
+                    <div id="web_login_security">
+                        <h2>Yudha Web Login Security</h2>
+                        <div class="row mt16 o_settings_container"
+                             name="default_taxes_setting_container">
+                            <div class="col-12 col-lg-6 o_setting_box"
+                                 id="default_taxes">
+                                <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+                                    <div class="content-group">
+                                        <div class="row mt16">
+                                            <label string="Activated" for="used_blocked" class="col-lg-3 o_light_label"/>
+                                            <field name="used_blocked"/>
+                                            <label string="Max Login" for="allowed_login_attempts" class="col-lg-3 o_light_label" attrs="{'invisible': [('used_blocked','=',False)]}"/>
+                                            <field name="allowed_login_attempts" attrs="{'invisible': [('used_blocked','=',False)]}"/>
+                                            <label string="Blocked By" for="blocked_by" class="col-lg-3 o_light_label" attrs="{'invisible': [('used_blocked','=',False)]}"/>
+                                            <field name="blocked_by" attrs="{'invisible': [('used_blocked','=',False)]}"/>
+                                            <label string="IP Address" for="blocked_by_ip" class="col-lg-3 o_light_label" attrs="{'invisible': ['|','|','|',('used_blocked','=',False),('blocked_by','=','by_country'),('blocked_by','=','by_user'),('blocked_by','=',False)]}"/>
+                                            <field name="blocked_by_ip" attrs="{'invisible': ['|','|','|',('used_blocked','=',False),('blocked_by','=','by_country'),('blocked_by','=','by_user'),('blocked_by','=',False)],'required': [('blocked_by','=','by_ip'),('used_blocked','!=',False)]}"/>
+                                            <label string="Country Name" for="blocked_by_country" class="col-lg-3 o_light_label" attrs="{'invisible': ['|','|','|',('used_blocked','=',False),('blocked_by','=','by_ip'),('blocked_by','=','by_user'),('blocked_by','=',False)]}"/>
+                                            <field name="blocked_by_country" attrs="{'invisible': ['|','|','|',('used_blocked','=',False),('blocked_by','=','by_ip'),('blocked_by','=','by_user'),('blocked_by','=',False)],'required': [('blocked_by','=','by_country'),('used_blocked','!=',False)]}"/>
+                                            <label string="User Name" for="blocked_by_username" class="col-lg-3 o_light_label" attrs="{'invisible': ['|','|','|',('blocked_by','=',False),('used_blocked','=',False),('blocked_by','=','by_ip'),('blocked_by','=','by_country')]}"/>
+                                            <field name="blocked_by_username" attrs="{'invisible': ['|','|','|',('blocked_by','=',False),('used_blocked','=',False),('blocked_by','=','by_ip'),('blocked_by','=','by_country')],'required': [('blocked_by','=','blocked_by_username'),('used_blocked','!=',False)]}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

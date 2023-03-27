@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+
+    <record id="wizard_stock_request_order_kanban_form" model="ir.ui.view">
+        <field name="name">wizard.stock.request.order.kanban.form</field>
+        <field name="model">wizard.stock.request.order.kanban</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="wizard_stock_request_kanban_form"/>
+        <field name="arch" type="xml">
+            <field name="kanban_id" position="after">
+                <field name="order_id" invisible="1"/>
+            </field>
+        </field>
+    </record>
+
+    <act_window id="wizard_stock_request_order_kanban_action"
+                name="Add Kanban"
+                res_model="wizard.stock.request.order.kanban"
+                view_mode="form"
+                context="{'default_order_id': active_id}"
+                target="new"/>
+
+</odoo>

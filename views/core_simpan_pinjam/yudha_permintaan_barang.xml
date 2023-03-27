@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <record id="view_permintaan_barang_tree" model="ir.ui.view">
+            <field name="name">yudha.permintaan.barang.tree</field>
+            <field name="model">yudha.permintaan.barang</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Permintaan Barang">
+                    <field name="tgl_minta"/>
+                    <field name="nama"/>
+                    <field name="ttl"/>
+                    <field name="no_anggota"/>
+                    <field name="golongan"/>
+                    <field name="unit_kerja"/>
+                    <field name="no_hp"/>
+                    <field name="bulan_angsuran"/>
+                    <field name="no_hp"/>
+                    <field name="bayar_bulan"/>
+                    <field name="nilai_pesanan"/>
+                    <field name="uang_muka"/>
+                    <field name="sisa_pinjaman"/>
+                    <field name="jasa_koperasi"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- form -->
+        <record id="view_permintaan_barang_form" model="ir.ui.view">
+            <field name="name">yudha.permintaan.barang.form</field>
+            <field name="model">yudha.permintaan.barang</field>
+            <field name="type">form</field>
+            <field name="priority" eval="7"/>
+            <field name="arch" type="xml">
+                <form string="Permintaan Barang" >
+                    <header>
+                        <button string="Validate" type="object" name="validate" states="draft"/>
+                        <field  name="state" widget="statusbar" statusbar_visible="draft,confirm" statusbar_colors='{"confirm":"blue"}'/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="id" class="oe_edit_only" string="Peminjaman Konsumtif"/>
+                        </div>
+                        <group string="">
+                            <field name="tgl_minta"/>
+                            <field name="nama"/>
+                            <field name="ttl"/>
+                            <field name="no_anggota"/>
+                            <field name="golongan"/>
+                            <field name="unit_kerja"/>
+                            <field name="no_hp"/>
+                            <field name="bulan_angsuran"/>
+                            <field name="no_hp"/>
+                            <field name="bayar_bulan"/>
+                            <field name="nilai_pesanan"/>
+                            <field name="uang_muka"/>
+                            <field name="sisa_pinjaman"/>
+                            <field name="jasa_koperasi"/>
+                        </group>
+                        <notebook>
+                              <page string="Details">
+                                  <field name="yudha_minta_ids" widget="one2many_list" >
+                                     <tree string="Detail Peminjaman Konsumtif">
+                                         <field name="prod_id" />
+                                         <field name="type"/>
+                                         <field name="kuantitas"/>
+                                         <field name="keterangan"/>
+                                     </tree>
+                                  </field>
+                              </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- pivot -->
+        <record id="permintaan_barang_pivot" model="ir.ui.view">
+            <field name="name">yudha_permintaan_barang_pivot</field>
+            <field name="model">yudha.permintaan.barang</field>
+            <field name="arch" type="xml">
+                <pivot string="tgl_minta">
+                    <field name="tgl_minta" type ="row"/>
+                </pivot>
+            </field>
+        </record>
+
+    </data>
+</odoo>

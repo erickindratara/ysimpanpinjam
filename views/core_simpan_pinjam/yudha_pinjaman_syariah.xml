@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <record id="view_peminjaman_syariah_tree" model="ir.ui.view">
+            <field name="name">yudha.peminjaman.syariah.tree</field>
+            <field name="model">yudha.peminjaman.syariah</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Peminjaman Tunai">
+                        <field name="docnum"/>
+                        <field name="tgl_minta"/>
+                        <field name="nama"/>
+                        <field name="tgl_lahir"/>
+                        <field name="no_anggota"/>
+                        <field name="unit_kerja"/>
+                        <field name="golongan"/>
+                        <field name="tujuan"/>
+                        <field name="jml_dimohon"/>
+                        <field name="waktu_angsur"/>
+                        <field name="jml_disetujui"/>
+                        <field name="bulan_angsur"/>
+                        <field name="pot_per_bulan"/>
+                        <field name="pot_per_tahun"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- form -->
+        <record id="view_peminjaman_syariah_form" model="ir.ui.view">
+            <field name="name">yudha.peminjaman.syariah.form</field>
+            <field name="model">yudha.peminjaman.syariah</field>
+            <field name="type">form</field>
+            <field name="priority" eval="7"/>
+            <field name="arch" type="xml">
+                <form string="Peminjaman Dana" >
+                    <header>
+                        <button string="Validate" type="object" name="validate" states="draft"/>
+                        <field  name="state" widget="statusbar" statusbar_visible="draft,confirm" statusbar_colors='{"confirm":"blue"}'/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="id" class="oe_edit_only" string="Peminjaman Syariah"/>
+                        </div>
+                        <group string="">
+                            <field name="docnum"/>
+                            <field name="tgl_minta"/>
+                            <field name="nama"/>
+                            <field name="tgl_lahir"/>
+                            <field name="no_anggota"/>
+                            <field name="unit_kerja"/>
+                            <field name="golongan"/>
+                            <field name="tujuan"/>
+                            <field name="jml_dimohon"/>
+                            <field name="waktu_angsur"/>
+                            <field name="jml_disetujui"/>
+                            <field name="bulan_angsur"/>
+                            <field name="pot_per_bulan"/>
+                            <field name="pot_per_tahun"/>
+                            <field name="f_ktp"/>
+                            <field name="f_slip"/>
+                            <field name="f_kk"/>
+                            <field name="f_rek_mandiri"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- pivot -->
+        <record id="peminjaman_syariah_pivot" model="ir.ui.view">
+            <field name="name">yudha.peminjaman.syariah.pivot</field>
+            <field name="model">yudha.peminjaman.syariah</field>
+            <field name="arch" type="xml">
+                <pivot string="tgl_minta">
+                    <field name="tgl_minta" type ="row"/>
+                </pivot>
+            </field>
+        </record>
+
+    </data>
+</odoo>

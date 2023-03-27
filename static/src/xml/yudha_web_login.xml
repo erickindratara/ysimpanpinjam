@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-extend="UserMenu.Actions">
+        <t t-jquery="a[data-menu='documentation']" t-operation="before">
+            <switch-lang/>
+            <a role="menuitem" href="#" data-menu="debug" class="dropdown-item">Activate the developer mode</a>
+            <a role="menuitem" href="#" data-menu="debugassets" class="dropdown-item">Activate the developer mode (with assets)</a>
+            <a role="menuitem" href="#" data-menu="quitdebug" class="dropdown-item">Deactivate the developer mode</a>
+            <div role="separator" class="dropdown-divider"/>
+            <a role="menuitem" href="#" data-menu="documentation_dev" class="dropdown-item">Developer Manual</a>
+        </t>
+    </t>
+    <t t-inherit="web.HomeMenu" t-inherit-mode="extension" owl="1">
+        <t t-jquery="div[class='o_menu_search']" t-operation="before">
+            <div class="row justify-center" style="padding-bottom:80px;padding-top:5px;">
+                <div class="col-md-4">
+                    <img src="/web_responsive/static/src/img/logo-polri.png" alt="logo" style="display:block;margin-left: auto; margin-right: auto;width: 50%"/>
+                </div>
+                <div class="col-md-8" style="display:flex;align-items:center">
+                    <h1 style="font-size:40px; color:#FFFFFF;justify-content:center;">SISTEM MANAJEMEN ASET</h1>
+                </div>
+            </div>
+        </t>
+    </t>
+</templates>

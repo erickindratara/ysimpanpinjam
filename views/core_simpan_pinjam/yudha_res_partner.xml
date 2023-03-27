@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+      <record model="ir.ui.view" id="yudha_res_partner">
+      <field name="name">yudha_res_partner</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
+            <field name="category_id" position="replace">
+                    <field name="category_id"/>
+            </field>
+            <field name="mobile" position="replace">
+                    <field name="mobile" widget="phone"/>
+            </field>
+            <field name="email" position="replace">
+                    <field name="email" widget="email"/>
+            </field>
+            <notebook>
+              <page name="anggota" string="Anggota">
+                   <group string="Anggota" name="agt">
+                        <group>
+                            <field name="alamat"/>
+                            <!--<field name="alamat_ktp"/>-->
+                            <!--<field name="npwp"/>-->
+                            <field name="no_anggota"/>
+                            <field name="npk"/>
+                            <field name="nm_bank"/>
+                            <field name="no_rek_agt"/>
+                            <field name="atas_nama"/>
+                        </group>
+                        <group>
+                            <field name="unit_kerja"/>
+                            <!--<field name="no_tel"/>-->
+                            <!--<field name="no_hp"/>-->
+                            <!--<field name="email"/>-->
+                            <field name="asal_pt" />
+                            <field name="jk" widget="radio"/>
+                            <field name="tgl_gabung"/>
+                        </group>
+                   </group>
+              </page>
+              <page name="simpan_pinjam" string="Simpan Pinjam">
+                   <group string="Saldo Pinjaman" name="sp" col="3" colspan="4">
+                       <group>
+                            <field name="iuran_pokok" string="Simpanan Pokok"/>
+                            <field name="iuran_wajib" string="Simpanan Wajib"/>
+                            <field name="iuran_sukarela" string="Simpanan Sukarela"/>
+                       </group>
+                       <group>
+                            <field name="saldo_tab_agt" string="Tabungan Anggota"/>
+                            <field name="saldo_masyarakat_bln" string="Tabungan Masyarakat"/>
+                            <field name="saldo_tab_khusus" string="Tabungan Khusus"/>
+                            <field name="saldo_deposito" string="Simpanan Berjangka"/>
+                       </group>
+                       <group>
+                            <field name="pinj_dana" string="Pinjaman Dana"/>
+                            <field name="pinj_konsumtif" string="Pinjaman Konsumtif"/>
+                            <field name="pinj_syariah" string="Pinjaman Syariah"/>
+                            <field name="pinj_barang" string="Pinjaman Barang"/>
+                            <field name="pinj_sembako" string="Pinjaman Sembako"/>
+                       </group>
+                    </group>
+                  <group string="Tabungan/Potongan Bulanan" col="3" colspan="4">
+                       <group>
+                            <field name="tab_agt_bln" string="Tabungan Anggota"/>
+                            <field name="tab_masyarakat_bln" string="Tabungan Masyarakat"/>
+                            <field name="tab_khusus_bln" string="Tabungan Khusus"/>
+                       </group>
+                       <group>
+                           <field name="pot_tab"/>
+                       </group>
+                    </group>
+              </page>
+            </notebook>
+      </field>
+      </record>
+
+      <!--<record model="ir.ui.view" id="res_partner_form3">
+      <field name="name">res_partner_form3</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
+          <data>
+              <xpath
+                 expr="//div[@name='div_address']/field[@name='country_id']" position="after">
+                 <field name="con_npwp"/>
+                  <field name="con_pajak"/>
+              </xpath>
+
+            </data>
+        <field name="email" position="after">
+              <field name="con_npwp"/>
+              <field name="con_pajak"/>
+        </field>
+      </field>
+      </record>-->
+    </data>
+</odoo>

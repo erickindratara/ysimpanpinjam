@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+   	 <template id="yudha_login_assets_login" inherit_id="web.assets_frontend">
+   	 	<xpath expr="." position="inside">
+   	 		<link rel="stylesheet" href="/yudha_simpan_pinjam/static/src/css/web_login_style.css"/>
+
+		</xpath>
+    </template>
+    <template id="assets_backend" name="Yudha WebAsset Backemd Assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+			<script type="text/javascript" src="/yudha_simpan_pinjam/static/src/js/yudha_web_login/yudha_ganti_background.js"></script>
+
+		</xpath>
+    </template>
+</odoo>

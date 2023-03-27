@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+            <record id="yudha_validasi_bulanan_tree" model="ir.ui.view">
+                <field name="name">yudha.validasi.bulanan.tree</field>
+                <field name="model">yudha.validasi.bulanan</field>
+                <field name="type">tree</field>
+                <field name="priority" eval="8"/>
+                <field name="arch" type="xml">
+                    <tree string="Validasi Bulanan">
+                         <field name="jns_dok" />
+                         <field name="no_val"/>
+                         <field name="tgl_val"/>
+                         <field name="confirm_by"/>
+                         <field name="per_bln"/>
+                         <field name="jns_trans"/>
+                         <field name="pt_asal"/>
+                         <field name="keterangan"/>
+                         <field name="state"/>
+                    </tree>
+                </field>
+            </record>
+            <record id="yudha_validasi_bulanan_form" model="ir.ui.view">
+                <field name="name">yudha.validasi.bulanan.form</field>
+                <field name="model">yudha.validasi.bulanan</field>
+                <field name="type">form</field>
+                <field name="priority" eval="8"/>
+                <field name="arch" type="xml">
+                    <form string="Master Validasi Bulanan">
+                        <header>
+                               <button name="billing_confirm" string="Billing Confirm" type="object" states="ready"/>
+                               <button name="validate" string="Validation" type="object" states="billing"/>
+                               <field  name="state" widget="statusbar" statusbar_visible="ready,billing,done" statusbar_colors='{"ready":"blue"}'/>
+                        </header>
+                        <sheet string="Validasi Bulanan">
+                            <group col="3" colspan="4">
+                                 <group >
+                                     <field name="jns_dok" />
+                                     <field name="no_val"/>
+                                     <field name="tgl_val" widget="date"/>
+                                     <field name="confirm_by"/>
+                                     <field name="per_bln"/>
+                                     <field name="jns_trans" widget="radio" invisible="1" />
+                                     <field name="pt_asal" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                     <field name="keterangan"/>
+                                     <field name="move_id" readonly="1" attrs="{'invisible': [('state','!=','done')]}"/>
+                                     <field name="move_id2" readonly="1" attrs="{'invisible': [('state','!=','done')]}"/>
+                                     <field name="move_id3" readonly="1" attrs="{'invisible': [('state','!=','done')]}"/>
+                                 </group>
+                                <group string="Periode Sembako">
+                                    <field name="start_date" widget="date"/>
+                                    <field name="end_date" widget="date"/>
+                                </group>
+                                <group string="Potongan">
+                                    <field name="pot_thr"/>
+                                    <field name="pot_ik"/>
+                                    <field name="pot_jasop"/>
+                                </group>
+                            </group>
+                             <notebook>
+                                  <page string="Potongan Simpanan">
+                                      <field name="wajib_ids" widget="one2many_list"  create="false" delete="false" editable="bottom" >
+                                          <tree string="Detail Validasi Harian" create="false" editable="bottom">
+                                                <field name="wajib_id" invisible="1"/>
+                                                <field name="state" invisible="1"/>
+                                                <field name="jns_simpanan" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="partner_id" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="no_anggota" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="npk" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="unit_kerja" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="asal_pt" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="amount" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="realisasi" attrs="{'readonly': [('state','not in',('ready','billing'))]}"/>
+                                          </tree>
+                                      </field>
+                                  </page>
+                                  <page string="Potongan Tabungan">
+                                      <field name="tabungan_ids" widget="one2many_list"  create="false" delete="false" editable="bottom" >
+                                          <tree string="Detail Validasi Harian" create="false" editable="bottom">
+                                                <field name="tabungan_id" invisible="1"/>
+                                                <field name="state" invisible="1"/>
+                                                <field name="partner_id" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="no_anggota" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="npk" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="unit_kerja" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="asal_pt" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="amount" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="realisasi" attrs="{'readonly': [('state','not in',('ready','billing'))]}"/>
+                                          </tree>
+                                      </field>
+                                  </page>
+                                  <page string="Angsuran Dana">
+                                      <field name="dana_ids">
+                                          <tree string="Detail Validasi Bulanan" create="false" delete="false" editable="bottom">
+                                                <field name="dana_id" invisible="1"/>
+                                                <field name="detail_id" invisible="1"/>
+                                                <field name="state" invisible="1"/>
+                                                <field name="partner_id" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="no_anggota" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="npk" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="unit_kerja" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="asal_pt" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="jml_pokok" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="jml_bunga" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="amount" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="realisasi" attrs="{'readonly': [('state','not in',('ready','billing'))]}"/>
+                                          </tree>
+                                      </field>
+                                  </page>
+                                  <page string="Angsuran Barang">
+                                      <field name="barang_ids">
+                                          <tree string="Detail Validasi Bulanan" create="false" delete="false" editable="bottom">
+                                                <field name="barang_id" invisible="1"/>
+                                                <field name="detail_id" invisible="1"/>
+                                                <field name="state" invisible="1"/>
+                                                <field name="partner_id" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="no_anggota" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="npk" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="unit_kerja" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="asal_pt" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="jml_pokok" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="jml_bunga" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="amount" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="realisasi" attrs="{'readonly': [('state','not in',('ready','billing'))]}"/>
+                                          </tree>
+                                      </field>
+                                  </page>
+                                  <page string="Angsuran Konsumtif">
+                                      <field name="konsumtif_ids" >
+                                          <tree string="Detail Validasi Bulanan" create="false" delete="false" editable="bottom" >
+                                                <field name="konsumtif_id" invisible="1"/>
+                                                <field name="detail_id" invisible="1"/>
+                                                <field name="state" invisible="1"/>
+                                                <field name="partner_id" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="loan_id" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="no_anggota" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="npk" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="unit_kerja" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="asal_pt" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="amount" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="realisasi" attrs="{'readonly': [('state','not in',('ready','billing'))]}"/>
+                                          </tree>
+                                      </field>
+                                  </page>
+                                  <page string="Angsuran Sembako">
+                                      <field name="sembako_ids" >
+                                          <tree string="Detail Validasi Bulanan" create="false" delete="false" editable="bottom" >
+                                                <field name="sembako_id" invisible="1"/>
+                                                <field name="detail_id" invisible="1"/>
+                                                <field name="state" invisible="1"/>
+                                                <field name="partner_id" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="no_anggota" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="npk" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="unit_kerja" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="asal_pt" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="amount" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="realisasi" attrs="{'readonly': [('state','not in',('ready','billing'))]}"/>
+                                          </tree>
+                                      </field>
+                                  </page>
+                                  <page string="Angsuran Syariah/KPR">
+                                      <field name="syariah_ids" >
+                                          <tree string="Detail Validasi Bulanan" create="false" delete="false" editable="bottom" >
+                                                <field name="syariah_id" invisible="1"/>
+                                                <field name="detail_id" invisible="1"/>
+                                                <field name="state" invisible="1"/>
+                                                <field name="partner_id" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="loan_id" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="no_anggota" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="npk" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="unit_kerja" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="asal_pt" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="amount" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="realisasi" attrs="{'readonly': [('state','not in',('ready','billing'))]}"/>
+                                          </tree>
+                                      </field>
+                                  </page>
+                                  <page string="Potongan THR/IK/JASOP">
+                                      <field name="thrikjasop_ids" >
+                                          <tree string="Detail Potongan THR/IK/JASOP" create="false" delete="false" editable="bottom" >
+                                                <field name="thrikjasop_id" invisible="1"/>
+                                                <field name="state" invisible="1"/>
+                                                <field name="partner_id" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="docnum" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="no_anggota" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="npk" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="unit_kerja" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="asal_pt" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="jenis_pinjaman" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="type_potongan" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="pot_thr" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="pot_ik" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="pot_jasop" attrs="{'readonly': [('state','!=','ready')]}"/>
+                                                <field name="real_thr" attrs="{'readonly': [('state','not in',('ready','billing'))]}"/>
+                                                <field name="real_ik" attrs="{'readonly': [('state','not in',('ready','billing'))]}"/>
+                                                <field name="real_jasop" attrs="{'readonly': [('state','not in',('ready','billing'))]}"/>
+                                          </tree>
+                                      </field>
+                                  </page>
+                             </notebook>
+                         </sheet>
+                    </form>
+                </field>
+            </record>
+     </data>
+</odoo>

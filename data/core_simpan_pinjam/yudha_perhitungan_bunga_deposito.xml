@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+  <data>
+    <record id="perhitungan_bunga_deposito_scheduler" model="ir.cron">
+      <!--<field name="function">schedule_sync</field>-->
+      <field name="interval_type">days</field>
+      <field name="name">Perhitungan Bunga Deposito Scheduler</field>
+      <field name="numbercall">-1</field>
+      <field name="priority">5</field>
+      <field name="doall">True</field>
+      <field name="active">False</field>
+      <field name="interval_number">1</field>
+      <field name="model_id" ref="model_yudha_perhitungan_bunga"/>
+      <field name="state">code</field>
+      <field name="code">model.perhitungan_bunga_deposito()</field>
+    </record>
+  </data>
+</odoo>

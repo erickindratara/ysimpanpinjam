@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <record id="view_yudha_tabungan_tree" model="ir.ui.view">
+            <field name="name">yudha.tabungan.tree</field>
+            <field name="model">yudha.tabungan</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Tabungan">
+                    <field name="nm_trans"/>
+                    <field name="docnum"/>
+                    <field name="tgl_trans"/>
+                    <field name="partner_id"/>
+                    <field name="no_agt"/>
+                    <field name="jenis_tabungan"/>
+                    <field name="jns_trans"/>
+                    <field name="asal_dana"/>
+                    <field name="no_rek_agt"/>
+                    <field name="nm_bank"/>
+                    <field name="atasnama"/>
+                    <field name="no_rek_bank"/>
+                    <field name="balance_awal"/>
+                    <field name="debit" />
+                    <field name="credit"/>
+                    <field name="balance_akhir"/>
+                    <field name="keterangan"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- form -->
+        <record id="view_yudha_tabungan_form" model="ir.ui.view">
+            <field name="name">yudha.tabungan.form</field>
+            <field name="model">yudha.tabungan</field>
+            <field name="type">form</field>
+            <field name="priority" eval="7"/>
+            <field name="arch" type="xml">
+                <form string="Tabungan">
+                    <header>
+<!--                        <button name="print_buku" string="Print Buku" type="object" states="ready"/>-->
+<!--                        <button name="print_validasi" string="Print Validasi" type="object" states="ready"/>-->
+                        <field  name="state" widget="statusbar" statusbar_visible="ready,done" statusbar_colors='{"done":"blue"}'/>
+                    </header>
+                    <sheet>
+                        <group string="">
+                            <field name="nm_trans"/>
+                            <field name="docnum"/>
+                            <field name="tgl_trans" widget="date"/>
+                            <field name="jenis_tabungan" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            <field name="no_agt"/>
+                            <field name="partner_id" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            <field name="no_rekening" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            <field name="nama_rekening"/>
+                            <field name="jns_trans" widget="radio"/>
+                            <field name="asal_dana" attrs="{'invisible':['|',('jns_trans', '=', 'TD')]}"/>
+                            <field name="no_rek_agt" attrs="{'invisible':['|',('asal_dana', '=', 'CS'),('jns_trans','=','SD')]}"/>
+                            <field name="nm_bank" attrs="{'invisible':['|',('asal_dana', '=', 'CS'),('jns_trans','=','SD')]}"/>
+                            <field name="atasnama" attrs="{'invisible':['|',('asal_dana', '=', 'CS'),('jns_trans','=','SD')]}"/>
+                            <field name="no_rek_bank" attrs="{'invisible':['|',('jns_trans','=','TD'),('asal_dana', '=', 'CS')]}" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            <field name="balance_awal_view" />
+                            <field name="balance_awal" invisible="1" />
+                            <field name="jml_tab" />
+                            <field name="balance_akhir_view" />
+                            <field name="balance_akhir" invisible="1" />
+                            <field name="debit" invisible="1"  />
+                            <field name="credit" invisible="1" />
+                            <field name="code_trans" invisible="1" />
+                            <field name="keterangan"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- pivot -->
+        <record id="yudha_tabungan_pivot" model="ir.ui.view">
+            <field name="name">yudha.tabungan.pivot</field>
+            <field name="model">yudha.tabungan</field>
+            <field name="arch" type="xml">
+                <pivot string="date">
+                    <field name="tgl_trans" type ="row"/>
+                </pivot>
+            </field>
+        </record>
+
+    </data>
+</odoo>

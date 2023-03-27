@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+    <data>
+        <record id="paperformat_kartu_pinjaman" model="report.paperformat">
+            <field name="name">Kartu Pinjaman</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">35</field>
+            <field name="dpi">80</field>
+        </record>
+        <report id="report_kartu_pinjaman_barang"
+                string="Kartu Pinjaman"
+                model="yudha.peminjaman.barang"
+                report_type="qweb-pdf"
+                file="yudha.peminjaman.barang"
+                name="yudha_simpan_pinjam.kartu_pinjaman_barang_report"
+                paperformat="yudha_simpan_pinjam.paperformat_kartu_pinjaman">
+        </report>
+
+        <template id="kartu_pinjaman_barang_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="yudha_simpan_pinjam.kartu_pinjaman_barang_document"></t>
+                </t>
+            </t>
+        </template>
+
+        <template id="kartu_pinjaman_barang_document">
+            <t t-call="web.external_layout">
+                <div style="font-Size:10px;" class="page">
+                    <h1>
+                        <div style="font-Size:16px;text-align: center;text-decoration: underline;font-weight:bold;">KARTU PINJAMAN</div>
+                        <div style="font-Size:10px;text-align: center;">Nomor : <span t-field="doc.docnum"/></div>
+                        <div class="row">
+                            <div style="padding-top:10px"> </div>
+                        </div>
+                        <div class="row" style="font-Size:11px;text-align: left">
+                            <div class="col-xs-3">Nama</div>
+                            <div class="col-xs-2"><t-span t-field="doc.partner_id"/></div>
+                        </div>
+                        <div class="row" style="font-Size:11px;text-align: left">
+                            <div class="col-xs-3">NPK</div>
+                            <div class="col-xs-2"><t-span t-field="doc.npk"/></div>
+                        </div>
+                        <div class="row" style="font-Size:11px;text-align: left">
+                            <div class="col-xs-3">No Anggota</div>
+                            <div class="col-xs-2"><t-span t-field="doc.no_agt"/></div>
+                        </div>
+                        <div class="row" style="font-Size:11px;text-align: left">
+                            <div class="col-xs-3">Unit Kerja</div>
+                            <div class="col-xs-2"><t-span t-field="doc.unit_kerja"/></div>
+                        </div>
+                        <div class="row" style="font-Size:11px;text-align: left">
+                            <div class="col-xs-3">Jumlah Pinjaman</div>
+                            <div class="col-xs-2"><t-span t-field="doc.jml_pinjam"/></div>
+                        </div>
+                        <div class="row" style="font-Size:11px;text-align: left">
+                            <div class="col-xs-3">Jangka Waktu</div>
+                            <div class="col-xs-2"><t-span t-field="doc.lama_cicilan"/> bulan</div>
+                        </div>
+                        <!--<div class="row" style="font-Size:11px;text-align: left">-->
+                        <!--    <div class="col-xs-3">Bunga</div>-->
+                        <!--    <div class="col-xs-2"><t-span t-field="doc.bunga"/> % pa</div>-->
+                        <!--</div>-->
+                    </h1>
+                    <div class="row">
+                        <div class="col-xs-12">Perhitungan bunga harian dengan rate <span t-field="doc.bunga"/> % pa </div>
+                    </div>
+                    <div class="row">
+                        <div style="padding-top:10px"> </div>
+                    </div>
+                    <table class="table table-condensed table-striped">
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Keterangan</th>
+                            <th class="text-right">Angsuran Pokok</th>
+                            <th class="text-right">Angsuran Bunga</th>
+                            <th class="text-right">Actual Angsuran</th>
+                            <th class="text-right">Saldo Pinjaman</th>
+                        </tr>
+                        <t t-set="total_pokok" t-value="0"/>
+                        <t t-set="total_bunga" t-value="0"/>
+                        <t t-set="total_cicilan" t-value="0"/>
+                        <t t-set="saldo_pinjaman" t-value="0"/>
+                        <tr t-foreach="doc.pay_ids" t-as="line">
+                            <t t-if="line.jml_cicilan&gt;0">
+                            <!--<t t-if="line.date_pay&lt;doc.last_paydate">-->
+                              <td><span t-field="line.date_pay"/></td>
+                              <td><span t-field="line.description"/></td>
+                              <td class="text-right"><span t-field="line.jml_pokok"/></td>
+                              <td class="text-right"><span t-field="line.jml_bunga"/></td>
+                              <td class="text-right"><span t-field="line.jml_cicilan"/></td>
+                              <td class="text-right"><span t-field="line.saldo_pinjaman"/></td>
+                              <t t-set="total_pokok" t-value="total_pokok+line.jml_pokok"/>
+                              <t t-set="total_bunga" t-value="total_bunga+line.jml_bunga"/>
+                              <t t-set="total_cicilan" t-value="total_cicilan+line.jml_cicilan"/>
+                              <t t-set="saldo_pinjaman" t-value="line.saldo_pinjaman"/>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td/>
+                            <th class="text-left">Jumlah Total</th>
+                            <th class="text-right"><span t-esc="'{0:,.2f}'.format(total_pokok)"/></th>
+                            <th class="text-right"><span t-esc="'{0:,.2f}'.format(total_bunga)"/></th>
+                            <th class="text-right"><span t-esc="'{0:,.2f}'.format(total_pokok+total_bunga)"/></th>
+                            <th class="text-right"><span t-esc="'{0:,.2f}'.format(saldo_pinjaman)"/></th>
+                        </tr>
+                    </table>
+                    <table class="table">
+                        <tr>
+                            <th/>
+                            <th/>
+                            <th/>
+                            <th/>
+                            <th/>
+                            <th>Bontang, <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/></th>
+                        </tr>
+                        <tr>
+                            <th/>
+                            <th/>
+                            <th>Diketahui</th>
+                            <th> </th>
+                            <th/>
+                            <th class="col-xs-3">Disiapkan</th>
+                        </tr>
+                        <tr>
+                            <td style="padding-top:100px">                      </td>
+                            <td style="padding-top:100px">                      </td>
+                            <td style="padding-top:100px">......................</td>
+                            <td style="padding-top:100px">                      </td>
+                            <td style="padding-top:100px">                      </td>
+                            <td style="padding-top:100px">......................</td>
+                        </tr>
+                        <tr>
+                            <td>                        </td>
+                            <td>                        </td>
+                            <td>      Junaid Gurdan     </td>
+                            <td>                        </td>
+                            <td>                        </td>
+                            <td>       Puji Sadarmi     </td>
+
+                        </tr>
+                    </table>
+                    <div class="oe_structure"/>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

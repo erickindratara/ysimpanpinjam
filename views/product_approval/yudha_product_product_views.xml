@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Author => Albertus Restiyanto Pramayudha
+     email  => xabre0010@gmail.com
+     linkedin => https://www.linkedin.com/in/albertus-restiyanto-pramayudha-470261a8/
+     youtube => https://www.youtube.com/channel/UCCtgLDIfqehJ1R8cohMeTXA
+-->
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="product_form_view">
+      <field name="name">product_form_view</field>
+      <field name="model">product.product</field>
+      <field name="inherit_id" ref="product.product_normal_form_view"/>
+      <field name="arch" type="xml">
+          <xpath expr="//header" position="inside">
+            <button name="request_for_approval" 
+              type="object" 
+              string="Request For Approval" 
+              class="oe_highlight"
+              groups="purchase.group_purchase_user"
+              attrs="{'invisible': [('state', '!=', 'draft')]}"
+            />
+
+            <button name="approve" 
+              type="object" 
+              string="Approve" 
+              class="oe_highlight"
+              attrs="{'invisible': ['|', ('state','!=','to_approve'), ('user_can_approve', '=', False)]}"
+            />
+
+            <button name="reject" 
+              type="object" 
+              string="Reject" 
+              class="oe_highlight"
+              attrs="{'invisible': [('state','!=','to_approve')]}"
+            />
+
+            <button name="set_to_draft" 
+              type="object" 
+              string="Set To Draft"
+              attrs="{'invisible': [('state','!=','reject')]}"
+            />
+
+            <field name="state" widget="statusbar" />
+              <field name="is_product_template" invisible="1"/>
+              <field name="user_can_approve" invisible="1"/>
+          </xpath>
+
+          <xpath expr="//page[@name='general_information']" position="after">
+            <page name="list_of_approver" string="List Approver" attrs="{'invisible': [('state','=','draft')]}">
+               <field name="list_approver_ids" readonly="1">
+                <tree string="Approver" editable="bottom">
+                      <field name="user_id"/>
+                      <field name="group_id"/>
+                      <field name="state"/>
+                      <field name="date"/>
+                  </tree>
+              </field>
+          </page> 
+          </xpath>
+
+          <field name="image_1920" position="attributes">
+            <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+          </field>
+
+          <field name="name" position="attributes">
+            <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+          </field>
+
+          <field name="sale_ok" position="attributes">
+            <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+          </field>
+
+          <field name="purchase_ok" position="attributes">
+            <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+          </field>
+
+          <field name="type" position="attributes">
+            <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+          </field>
+
+          <field name="default_code" position="attributes">
+            <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+          </field>
+
+          <field name="barcode" position="attributes">
+            <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+          </field>
+
+          <field name="categ_id" position="attributes">
+            <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+          </field>
+
+          <field name="lst_price" position="attributes">
+            <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+          </field>
+
+          <field name="standard_price" position="attributes">
+            <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+          </field>
+
+          <field name="company_id" position="attributes">
+            <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+          </field>
+
+          <field name="uom_id" position="attributes">
+            <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+          </field>
+
+          <field name="uom_po_id" position="attributes">
+            <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+          </field>
+
+          <field name="description" position="attributes">
+            <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+          </field>
+      </field>
+    </record>
+
+    <record id="product_category_view_form" model="ir.ui.view">
+    	<field name="name">product.category.view.form</field>
+    	<field name="model">product.category</field>
+    	<field name="inherit_id" ref="product.product_category_form_view"/>
+    	<field name="arch" type="xml">
+    		<field name="parent_id" position="after">
+    			<field name="group_ids" widget="many2many_tags"/>
+    			<div colspan="2">
+                	<field name="total_group_ids" nolabel="1" widget="many2many_tags"/>
+                </div>
+    		</field>
+    	</field>
+    </record>
+
+  </data>
+</odoo>

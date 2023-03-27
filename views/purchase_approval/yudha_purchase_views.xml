@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- Purchase Requisition -->
+    <record model="ir.actions.act_window" id="purchase_requisition.action_purchase_requisition">
+        <field name="name">Purchase Requisition</field>
+        <field name="help" type="html">
+        	<p class="o_view_nocontent_smiling_face">
+        		Start a new purchase requisition
+        	s</p>
+        </field>
+    </record>
+
+    <record model="ir.ui.menu" id="purchase_requisition.menu_purchase_requisition_pro_mgt">
+        <field name="name">Purchase Requisition</field>
+    </record>
+
+    <record id="inherit_view_purchase_requisition_form" model="ir.ui.view">
+        <field name="name">inherit.view.purchase.requisition.form</field>
+        <field name="model">purchase.requisition</field>
+        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form" />
+        <field name="arch" type="xml">
+			<!-- <xpath expr="//form/sheet/group/group[2]/field[@name='company_id']" position="after">
+                <field name='user_request_id' required='1'/>
+            </xpath> -->
+            <xpath expr="//form/sheet/notebook/page/field[@name='line_ids']/tree/field[@name='product_id']" position="after">
+               <field name='description'/>
+            </xpath>
+            <!-- akses hanya untuk purchase user 
+            <xpath expr="//form/header/button[@name='action_in_progress']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>-->
+            <xpath expr="//form/header/button[@name='action_open']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+            <xpath expr="//form/header/button[1]" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+            <xpath expr="//form/header/button[2]" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="inherit_view_purchase_requisition_tree" model="ir.ui.view">
+        <field name="name">inherit.view.purchase.requisition.tree</field>
+        <field name="model">purchase.requisition</field>
+        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="after">
+                <field name='rfq_number_ref'/>
+                <field name='po_number_ref'/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Purchase Order -->
+    <record id="inherit_purchase_order_form" model="ir.ui.view">
+        <field name="name">inherit.purchase.order.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form/header/button[@name='action_rfq_send'][1]" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+            <xpath expr="//form/header/button[@name='print_quotation'][1]" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+            <xpath expr="//form/header/button[@name='print_quotation'][2]" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+            <xpath expr="//form/header/button[@id='draft_confirm']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+            <xpath expr="//form/header/button[@id='bid_confirm']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+            <xpath expr="//form/header/button[@name='action_view_invoice'][1]" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+            <xpath expr="//form/header/button[@name='action_rfq_send'][2]" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+            <xpath expr="//form/header/button[@name='action_rfq_send'][3]" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+            <xpath expr="//form/header/button[@name='action_view_invoice'][2]" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+            <xpath expr="//form/header/button[@name='button_draft']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+            <xpath expr="//form/header/button[@name='button_cancel']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+            <xpath expr="//form/header/button[@name='button_done']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+            <xpath expr="//form/header/button[@name='button_approve']" position="before">
+            	<field name="user_manager_access" invisible="1"/>
+            	<field name="need_double_approve" invisible="1"/>
+            	<button name="button_approve_manager" type="object" string="Approve Order" class="oe_highlight"
+            		attrs="{'invisible': [('user_manager_access', '=', False)]}" groups="purchase.group_purchase_user"/>
+            </xpath>
+            <xpath expr="//form/header/button[@name='button_approve']" position="attributes">
+                <attribute name="groups">purchase_3step_approval.group_purchase_cfo</attribute>
+                <attribute name="states"></attribute>
+                <attribute name="attrs">{'invisible': ['|', ('state', 'not in', ('to approve')), ('need_double_approve', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='taxes_id']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/form//field[@name='price_unit']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/form//field[@name='taxes_id']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+            <xpath expr="//field[@name='amount_untaxed']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+            <xpath expr="//field[@name='amount_tax']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+            <xpath expr="//field[@name='amount_total']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+      	</field>
+    </record>
+    <record id="purchase_order_stock_view_form_inherit" model="ir.ui.view">
+        <field name="name">purchase_order_stock_view_form_inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase_stock.purchase_order_view_form_inherit" />
+        <field name="arch" type="xml">
+            <xpath expr="//form/header/button[@name='action_view_picking']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user,stock.group_stock_user</attribute>
+            </xpath>
+            <xpath expr="//div[hasclass('oe_button_box')]/button[@name='action_view_picking']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user,stock.group_stock_user</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="inherit_purchase_order_tree" model="ir.ui.view">
+        <field name="name">inherit.purchase_order_tree</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='amount_untaxed']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+            <xpath expr="//field[@name='amount_total']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_user</attribute>
+            </xpath>
+      	</field>
+    </record>
+    <record id="view_purchase_order_filter" model="ir.ui.view">
+        <field name="name">view_purchase_order_filter</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='draft']" position="attributes">
+                <attribute name="domain">[('state', 'in', ('draft', 'sent'))]</attribute>
+            </xpath>
+            <xpath expr="//filter[@name='approved']" position="attributes">
+                <attribute name="domain">[('state', 'not in', ('draft', 'sent', 'to approve'))]</attribute>
+            </xpath>
+      	</field>
+    </record>
+    <record id="purchase_requisition_purchase_order_form" model="ir.ui.view">
+        <field name="name">purchase.requisition.purchase.order.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase_requisition.purchase_order_form_inherit" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='requisition_id']" position="attributes">
+                <attribute name="string">Purchase Requisition</attribute>
+            </xpath>
+      	</field>
+    </record>
+</odoo>
